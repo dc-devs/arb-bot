@@ -1,0 +1,31 @@
+{
+	"name": "arb-bot",
+	"version": "1.0.0",
+	"description": "arb bot for crypto",
+	"main": "build/main/index.js",
+	"typings": "build/main/index.d.ts",
+	"module": "build/module/index.js",
+	"license": "",
+	"keywords": [],
+	"scripts": {
+		"start": "node build/app.js",
+		"build": "rimraf ./build && tsc",
+		"test": "ava"
+	},
+	"dependencies": {
+		"console.table": "^0.10.0",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"moment": "^2.27.0",
+		"moment-timezone": "^0.5.31",
+		"web3": "^1.2.11"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.7",
+		"@types/node": "^14.0.27",
+		"ava": "^2.4.0",
+		"prettier": "^1.19.1",
+		"rimraf": "^3.0.2",
+		"typescript": "^3.9.7"
+	}
+}
