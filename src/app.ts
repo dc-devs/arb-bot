@@ -1,5 +1,5 @@
-import server from './server';
+import dotenv from 'dotenv';
 import arbitrageScanner from './arbitrageScanner';
 
-server.start();
+dotenv.config();
 arbitrageScanner.start();
