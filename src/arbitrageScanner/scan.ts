@@ -1,90 +1,8 @@
 import Web3 from 'web3';
-import moment from 'moment-timezone';
-import kyberConstants from '../exchanges/kyber/constants';
-import uniswapConstants from '../exchanges/uniswap/constants';
-
-const {
-	uniswapfactoryAbi,
-	uniswapExchangeAbi,
-	uniswapFactoryAddress,
-} = uniswapConstants;
-
-const { kyberExpectedRateAbi, kyberExpectedRateAddress } = kyberConstants;
+import checkPair from './checkPair';
 
 const scan = (rpcUrl: string) => {
-	const web3 = new Web3(rpcUrl) as Web3;
-
-	// Uniswap Factory Contract: https://etherscan.io/address/0xc0a47dfe034b400b47bdad5fecda2621de6c4d95#code
-	const uniswapFactoryContract = new web3.eth.Contract(
-		uniswapfactoryAbi,
-		uniswapFactoryAddress
-	);
-
-	// Kyber mainnet "Expected Rate": https://etherscan.io/address/0x96b610046d63638d970e6243151311d8827d69a5#readContract
-	const kyberRateContract = new web3.eth.Contract(
-		kyberExpectedRateAbi,
-		kyberExpectedRateAddress
-	);
-
-	interface checkPairArgs {
-		inputTokenSymbol: string;
-		inputTokenAddress: string;
-		outputTokenSymbol: string;
-		outputTokenAddress: string;
-		inputAmount: string;
-	}
-
-	const checkPair = async ({
-		inputTokenSymbol,
-		inputTokenAddress,
-		outputTokenSymbol,
-		outputTokenAddress,
-		inputAmount,
-	}: checkPairArgs) => {
-		// Uniswap Exchange Template: https://etherscan.io/address/0x09cabec1ead1c0ba254b09efb3ee13841712be14#code
-		const exchangeAddress = await uniswapFactoryContract.methods
-			.getExchange(outputTokenAddress)
-			.call();
-
-		const exchangeContract = new web3.eth.Contract(
-			uniswapExchangeAbi,
-			exchangeAddress
-		);
-
-		const uniswapResult = await exchangeContract.methods
-			.getEthToTokenInputPrice(inputAmount)
-			.call();
-
-		let kyberResult = await kyberRateContract.methods
-			.getExpectedRate(
-				inputTokenAddress,
-				outputTokenAddress,
-				inputAmount,
-				true
-			)
-			.call();
-
-		console.table([
-			{
-				'Input Token': inputTokenSymbol,
-				'Output Token': outputTokenSymbol,
-				'Input Amount': web3.utils.fromWei(inputAmount, 'ether'),
-				'Uniswap Return': web3.utils.fromWei(uniswapResult, 'ether'),
-				'Kyber Expected Rate': web3.utils.fromWei(
-					kyberResult.expectedRate,
-					'ether'
-				),
-				'Kyber Min Return': web3.utils.fromWei(
-					kyberResult.slippageRate,
-					'ether'
-				),
-				Timestamp: moment()
-					.tz('America/Chicago')
-					.format(),
-			},
-		]);
-	};
-
+	const web3 = new Web3(rpcUrl);
 	let priceMonitor: NodeJS.Timeout;
 	let monitoringPrice = false;
 
@@ -102,6 +20,7 @@ const scan = (rpcUrl: string) => {
 			const amountInWei = web3.utils.toWei('1', 'ether');
 
 			await checkPair({
+				web3,
 				inputTokenSymbol: 'ETH',
 				inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
 				outputTokenSymbol: 'MKR',
@@ -111,6 +30,7 @@ const scan = (rpcUrl: string) => {
 			});
 
 			await checkPair({
+				web3,
 				inputTokenSymbol: 'ETH',
 				inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
 				outputTokenSymbol: 'DAI',
@@ -120,6 +40,7 @@ const scan = (rpcUrl: string) => {
 			});
 
 			await checkPair({
+				web3,
 				inputTokenSymbol: 'ETH',
 				inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
 				outputTokenSymbol: 'KNC',
@@ -129,6 +50,7 @@ const scan = (rpcUrl: string) => {
 			});
 
 			await checkPair({
+				web3,
 				inputTokenSymbol: 'ETH',
 				inputTokenAddress: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
 				outputTokenSymbol: 'LINK',
@@ -148,7 +70,7 @@ const scan = (rpcUrl: string) => {
 
 	// Check markets every n seconds
 	const POLLING_INTERVAL =
-		parseInt(process.env.POLLING_INTERVAL as string, 10) || 3000; // 3 Seconds
+		parseInt(process.env.POLLING_INTERVAL as string, 10) || 500; // .5 Seconds
 	priceMonitor = setInterval(async () => {
 		await monitorPrice();
 	}, POLLING_INTERVAL);

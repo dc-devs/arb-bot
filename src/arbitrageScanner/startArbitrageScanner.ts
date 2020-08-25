@@ -1,8 +1,10 @@
 import scan from './scan';
 
+const rpcUrl = process.env.RPC_URL;
+
 const start = () => {
-	if (process.env.RPC_URL) {
-		scan(process.env.RPC_URL);
+	if (rpcUrl) {
+		scan(rpcUrl);
 	} else {
 		console.log('Please provide your RPC_URL!');
 	}
