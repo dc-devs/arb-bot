@@ -13,6 +13,11 @@
 		"test": "ava"
 	},
 	"dependencies": {
+		"@ethersproject/contracts": "^5.0.3",
+		"@ethersproject/providers": "^5.0.6",
+		"@ethersproject/solidity": "^5.0.3",
+		"@uniswap/sdk": "^3.0.3-beta.1",
+		"await-to-js": "^2.1.1",
 		"console.table": "^0.10.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
