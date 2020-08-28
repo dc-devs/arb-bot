@@ -1,34 +1,23 @@
 import Web3 from 'web3';
-import checkPair from './checkPair';
+import to from 'await-to-js';
+import getExecutionPrice from '../exchanges/uniswapv2/getExecutionPrice';
 
 const scan = (web3: Web3) => {
-	let priceMonitor: NodeJS.Timeout;
-	let monitoringPrice = false;
 	console.log(web3);
-	const monitorPrice = async () => {
-		if (monitoringPrice) {
-			return;
-		}
-		monitoringPrice = true;
+	setInterval(async () => {
+		const [executionPriceError, executionPrice] = await to(
+			getExecutionPrice('DAI')
+		);
 
-		try {
-			await checkPair();
-		} catch (error) {
-			console.error(error);
-			monitoringPrice = false;
-			clearInterval(priceMonitor);
-			return;
+		if (executionPriceError) {
+			throw executionPriceError;
 		}
 
-		monitoringPrice = false;
-	};
-
-	// Check markets every n seconds
-	const POLLING_INTERVAL =
-		parseInt(process.env.POLLING_INTERVAL as string, 10) || 500; // .5 Seconds
-	priceMonitor = setInterval(async () => {
-		await monitorPrice();
-	}, POLLING_INTERVAL);
+		console.log('');
+		console.log('--- UniswapV1 1 ETH -> DAI ---');
+		console.log('executionPrice: ', executionPrice?.executionPrice);
+		console.log('nextMidPrice: ', executionPrice?.nextMidPrice);
+	}, 1000);
 };
 
 export default scan;
