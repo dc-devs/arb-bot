@@ -25,20 +25,27 @@ const getExecutionPrice = async (tokenSymbol: string) => {
 		TradeType.EXACT_INPUT
 	);
 
-	const readableExecutionPrice = trade.executionPrice.toSignificant(6);
-	const readableNextMidPrice = trade.nextMidPrice.toSignificant(6);
+	const readableExecutionPrice = parseInt(
+		trade.executionPrice.toSignificant(6),
+		10
+	);
+	const readableNextMidPrice = parseInt(
+		trade.nextMidPrice.toSignificant(6),
+		10
+	);
 
 	const formattedExpectedRate = formatPrice(readableExecutionPrice);
-	const formattedWorstRate = formatPrice(readableNextMidPrice);
+	const formattedNextMidPrice = formatPrice(readableNextMidPrice);
 
 	return {
+		exchange: 'Uniswap v2',
 		raw: {
-			executionPrice: readableExecutionPrice,
+			expectedRate: readableExecutionPrice,
 			nextMidPrice: readableNextMidPrice,
 		},
 		formatted: {
-			executionPrice: formattedExpectedRate,
-			nextMidPrice: formattedWorstRate,
+			expectedRate: formattedExpectedRate,
+			nextMidPrice: formattedNextMidPrice,
 		},
 	};
 };

@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import to from 'await-to-js';
+import formatPrice from '../../utils/formatPrice';
 import getExchangeContract from './get-uniswap-v1-exchange-contract';
 import tokenSymbolAddressMap from '../../constants/token-symbol-address-map';
 
@@ -19,7 +20,21 @@ const getTokenPrice = async (web3: Web3, tokenSymbol: string) => {
 		?.getEthToTokenInputPrice(oneEther)
 		?.call();
 
-	return web3.utils.fromWei(tokenPriceWei, 'ether');
+	const readableTokenPrice = parseInt(
+		web3.utils.fromWei(tokenPriceWei, 'ether'),
+		10
+	);
+	const formattedTokenPrice = formatPrice(readableTokenPrice);
+
+	return {
+		exchange: 'Uniswap v1',
+		raw: {
+			expectedRate: readableTokenPrice,
+		},
+		formatted: {
+			expectedRate: formattedTokenPrice,
+		},
+	};
 };
 
 export default getTokenPrice;

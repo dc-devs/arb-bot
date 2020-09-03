@@ -26,6 +26,7 @@ const getKyberExpectedRate = async (
 	const formattedWorstRate = formatPrice(readableWorstRate);
 
 	return {
+		exchange: 'Kyber Network',
 		raw: {
 			expectedRate: readableExpectedRate,
 			worstRate: readableWorstRate,
