@@ -1,3 +1,3 @@
-import arbitrageScanner from './arbitrageScanner';
+import arbitrageScanner from './arbitrage-scanner';
 
 arbitrageScanner.start();

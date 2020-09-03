@@ -1,4 +1,4 @@
-import tokenSymbolAddressMap from './constants/tokenSymbolAddressMap';
+import tokenSymbolAddressMap from '../../constants/token-symbol-address-map';
 import {
 	WETH,
 	Route,

@@ -16,6 +16,7 @@
 		"@ethersproject/contracts": "^5.0.3",
 		"@ethersproject/providers": "^5.0.6",
 		"@ethersproject/solidity": "^5.0.3",
+		"@types/numeral": "0.0.28",
 		"@uniswap/sdk": "^3.0.3-beta.1",
 		"await-to-js": "^2.1.1",
 		"console.table": "^0.10.0",
@@ -23,6 +24,7 @@
 		"express": "^4.17.1",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
+		"numeral": "^2.0.6",
 		"web3": "^1.2.11"
 	},
 	"devDependencies": {
