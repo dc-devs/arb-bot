@@ -1,3 +1,4 @@
+import formatPrice from '../../utils/formatPrice';
 import tokenSymbolAddressMap from '../../constants/token-symbol-address-map';
 import {
 	WETH,
@@ -12,18 +13,33 @@ import {
 
 const getExecutionPrice = async (tokenSymbol: string) => {
 	const tokenAddress = tokenSymbolAddressMap[tokenSymbol];
-	const TOKEN = new Token(ChainId.MAINNET, tokenAddress, 18);
-	const pair = await Fetcher.fetchPairData(TOKEN, WETH[TOKEN.chainId]);
-	const route = new Route([pair], WETH[TOKEN.chainId]);
+	const destToken = new Token(ChainId.MAINNET, tokenAddress, 18);
+	const pair = await Fetcher.fetchPairData(
+		destToken,
+		WETH[destToken.chainId]
+	);
+	const route = new Route([pair], WETH[destToken.chainId]);
 	const trade = new Trade(
 		route,
-		new TokenAmount(WETH[TOKEN.chainId], '10000000'),
+		new TokenAmount(WETH[destToken.chainId], '10000000'),
 		TradeType.EXACT_INPUT
 	);
 
+	const readableExecutionPrice = trade.executionPrice.toSignificant(6);
+	const readableNextMidPrice = trade.nextMidPrice.toSignificant(6);
+
+	const formattedExpectedRate = formatPrice(readableExecutionPrice);
+	const formattedWorstRate = formatPrice(readableNextMidPrice);
+
 	return {
-		executionPrice: trade.executionPrice.toSignificant(6),
-		nextMidPrice: trade.nextMidPrice.toSignificant(6),
+		raw: {
+			executionPrice: readableExecutionPrice,
+			nextMidPrice: readableNextMidPrice,
+		},
+		formatted: {
+			executionPrice: formattedExpectedRate,
+			nextMidPrice: formattedWorstRate,
+		},
 	};
 };
 
