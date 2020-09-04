@@ -20,9 +20,8 @@ const getTokenPrice = async (web3: Web3, tokenSymbol: string) => {
 		?.getEthToTokenInputPrice(oneEther)
 		?.call();
 
-	const readableTokenPrice = parseInt(
-		web3.utils.fromWei(tokenPriceWei, 'ether'),
-		10
+	const readableTokenPrice = parseFloat(
+		web3.utils.fromWei(tokenPriceWei, 'ether')
 	);
 	const formattedTokenPrice = formatPrice(readableTokenPrice);
 

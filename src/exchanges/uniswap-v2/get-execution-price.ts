@@ -25,13 +25,11 @@ const getExecutionPrice = async (tokenSymbol: string) => {
 		TradeType.EXACT_INPUT
 	);
 
-	const readableExecutionPrice = parseInt(
-		trade.executionPrice.toSignificant(6),
-		10
+	const readableExecutionPrice = parseFloat(
+		trade.executionPrice.toSignificant(6)
 	);
-	const readableNextMidPrice = parseInt(
-		trade.nextMidPrice.toSignificant(6),
-		10
+	const readableNextMidPrice = parseFloat(
+		trade.nextMidPrice.toSignificant(6)
 	);
 
 	const formattedExpectedRate = formatPrice(readableExecutionPrice);

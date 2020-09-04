@@ -8,19 +8,24 @@ import getUniswapV1GetTokenPrice from '../exchanges/uniswap-v1/get-uniswap-v1-ge
 const { ETH, RSR } = tokenSymbols;
 
 const scan = async (web3: Web3) => {
-	// setInterval(async () => {
 	try {
-		const uniswapV1ExpectedRates = await getUniswapV1GetTokenPrice(
+		const uniswapV1ExpectedRates_ETH_RSR = await getUniswapV1GetTokenPrice(
 			web3,
 			RSR
 		);
-		const uniswapV2ExpectedRates = await getUniswapV2ExecutionPrice(RSR);
-		const kyberExpectedRates = await getKyberExpectedRate(web3, ETH, RSR);
+		const uniswapV2ExpectedRates_ETH_RSR = await getUniswapV2ExecutionPrice(
+			RSR
+		);
+		const kyberExpectedRates_ETH_RSR = await getKyberExpectedRate(
+			web3,
+			ETH,
+			RSR
+		);
 
-		const sortedExpectedRates = sortExpectedRates([
-			uniswapV1ExpectedRates,
-			uniswapV2ExpectedRates,
-			kyberExpectedRates,
+		const sortedExpectedRates_ETH_RSR = sortExpectedRates([
+			uniswapV1ExpectedRates_ETH_RSR,
+			uniswapV2ExpectedRates_ETH_RSR,
+			kyberExpectedRates_ETH_RSR,
 		]);
 
 		console.log('');
@@ -29,7 +34,30 @@ const scan = async (web3: Web3) => {
 		console.log('======================================');
 		console.log('');
 
-		sortedExpectedRates.forEach((sortedExpectedRate) => {
+		sortedExpectedRates_ETH_RSR.forEach((sortedExpectedRate) => {
+			console.log(
+				sortedExpectedRate.exchange,
+				sortedExpectedRate.formatted.expectedRate
+			);
+		});
+
+		const kyberExpectedRates_RSR_ETH = await getKyberExpectedRate(
+			web3,
+			RSR,
+			ETH
+		);
+
+		const sortedExpectedRates_RSR_ETH = sortExpectedRates([
+			kyberExpectedRates_RSR_ETH,
+		]);
+
+		console.log('');
+		console.log('======================================');
+		console.log('       Best Prices: 1 RSR -> ETH      ');
+		console.log('======================================');
+		console.log('');
+
+		sortedExpectedRates_RSR_ETH.forEach((sortedExpectedRate) => {
 			console.log(
 				sortedExpectedRate.exchange,
 				sortedExpectedRate.formatted.expectedRate
@@ -38,6 +66,7 @@ const scan = async (web3: Web3) => {
 	} catch (error) {
 		throw new Error(error);
 	}
+	// setInterval(async () => {
 	// }, 1000);
 };
 
