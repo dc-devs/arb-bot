@@ -1,15 +1,20 @@
+import Web3 from 'web3';
+import TokenInterface from '../../interfaces/Token';
 import formatPrice from '../../utils/formatPrice';
 import getExchangeContract from './get-uniswap-v1-exchange-contract';
-import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
+
+interface GetTokenPriceArgs {
+	web3: Web3;
+	destinationToken: TokenInterface;
+	sourceQuantity?: string;
+}
 
 const getTokenPrice = async ({
 	web3,
-	sourceToken,
 	destinationToken,
 	sourceQuantity = '1',
-}: GetExectutionPriceArgs) => {
+}: GetTokenPriceArgs) => {
 	try {
-		console.log(sourceToken);
 		const exhangeContract = await getExchangeContract(
 			web3,
 			destinationToken
