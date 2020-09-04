@@ -1,31 +1,35 @@
 import Web3 from 'web3';
+import tokens from '../constants/tokens';
 import sortExpectedRates from '../utils/sort-expected-rates';
-import tokenSymbols from '../constants/token-symbols';
-import getKyberExpectedRate from '../exchanges/kyber-network/get-kyber-expected-rate';
+// import getKyberExpectedRate from '../exchanges/kyber-network/get-kyber-expected-rate';
 import getUniswapV2ExecutionPrice from '../exchanges/uniswap-v2/get-execution-price';
-import getUniswapV1GetTokenPrice from '../exchanges/uniswap-v1/get-uniswap-v1-get-token-price';
+// import getUniswapV1GetTokenPrice from '../exchanges/uniswap-v1/get-uniswap-v1-get-token-price';
 
-const { ETH, RSR } = tokenSymbols;
+const { WETH, RSR } = tokens;
 
 const scan = async (web3: Web3) => {
 	try {
-		const uniswapV1ExpectedRates_ETH_RSR = await getUniswapV1GetTokenPrice(
-			web3,
-			RSR
-		);
+		// 	const uniswapV1ExpectedRates_ETH_RSR = await getUniswapV1GetTokenPrice(
+		// 		web3,
+		// 		RSR
+		// 	);
 		const uniswapV2ExpectedRates_ETH_RSR = await getUniswapV2ExecutionPrice(
-			RSR
+			{
+				web3,
+				sourceToken: WETH,
+				destinationToken: RSR,
+			}
 		);
-		const kyberExpectedRates_ETH_RSR = await getKyberExpectedRate(
-			web3,
-			ETH,
-			RSR
-		);
+		// const kyberExpectedRates_ETH_RSR = await getKyberExpectedRate(
+		// 	web3,
+		// 	ETH,
+		// 	RSR
+		// );
 
 		const sortedExpectedRates_ETH_RSR = sortExpectedRates([
-			uniswapV1ExpectedRates_ETH_RSR,
+			// uniswapV1ExpectedRates_ETH_RSR,
 			uniswapV2ExpectedRates_ETH_RSR,
-			kyberExpectedRates_ETH_RSR,
+			// kyberExpectedRates_ETH_RSR,
 		]);
 
 		console.log('');
@@ -41,14 +45,24 @@ const scan = async (web3: Web3) => {
 			);
 		});
 
-		const kyberExpectedRates_RSR_ETH = await getKyberExpectedRate(
-			web3,
-			RSR,
-			ETH
+		// const kyberExpectedRates_RSR_ETH = await getKyberExpectedRate(
+		// 	web3,
+		// 	RSR,
+		// 	ETH
+		// );
+
+		const uniswapV2ExpectedRates_RSR_ETH = await getUniswapV2ExecutionPrice(
+			{
+				web3,
+				sourceToken: RSR,
+				destinationToken: WETH,
+			}
 		);
 
+		console.log(uniswapV2ExpectedRates_RSR_ETH);
+
 		const sortedExpectedRates_RSR_ETH = sortExpectedRates([
-			kyberExpectedRates_RSR_ETH,
+			uniswapV2ExpectedRates_RSR_ETH,
 		]);
 
 		console.log('');
@@ -64,6 +78,7 @@ const scan = async (web3: Web3) => {
 			);
 		});
 	} catch (error) {
+		console.log(web3);
 		throw new Error(error);
 	}
 	// setInterval(async () => {

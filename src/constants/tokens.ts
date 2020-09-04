@@ -1,3 +1,9 @@
+import Token from '../interfaces/Token';
+
+export interface Tokens {
+	[key: string]: Token;
+}
+
 const tokens = {
 	RSR: {
 		symbol: 'RSR',
@@ -7,9 +13,15 @@ const tokens = {
 	},
 	ETH: {
 		symbol: 'ETH',
-		name: 'Ethereum',
+		name: 'Ether',
 		decimals: 18,
 		address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+	},
+	WETH: {
+		symbol: 'WETH',
+		name: 'Wrapped Ether',
+		decimals: 18,
+		address: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
 	},
 	DAI: {
 		symbol: 'DAI',
@@ -23,6 +35,6 @@ const tokens = {
 		decimals: 8,
 		address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
 	},
-};
+} as Tokens;
 
 export default tokens;

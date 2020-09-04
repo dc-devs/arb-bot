@@ -1,4 +1,4 @@
-import ExpectedRates from '../interfaces/expectedRates';
+import ExpectedRates from '../interfaces/Expected-Rates';
 
 const sortExpectedRates = (prices: ExpectedRates[]) => {
 	return prices.sort((a: ExpectedRates, b: ExpectedRates) => {

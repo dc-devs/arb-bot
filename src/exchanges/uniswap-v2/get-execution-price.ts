@@ -1,7 +1,7 @@
 import formatPrice from '../../utils/formatPrice';
-import tokenSymbolAddressMap from '../../constants/token-symbol-address-map';
+import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
+
 import {
-	WETH,
 	Route,
 	Token,
 	Trade,
@@ -11,17 +11,34 @@ import {
 	TokenAmount,
 } from '@uniswap/sdk';
 
-const getExecutionPrice = async (tokenSymbol: string) => {
-	const tokenAddress = tokenSymbolAddressMap[tokenSymbol];
-	const destToken = new Token(ChainId.MAINNET, tokenAddress, 18);
-	const pair = await Fetcher.fetchPairData(
-		destToken,
-		WETH[destToken.chainId]
+const getExecutionPrice = async ({
+	web3,
+	sourceToken,
+	destinationToken,
+	sourceQuantity = '1',
+}: GetExectutionPriceArgs) => {
+	const srcToken = new Token(
+		ChainId.MAINNET,
+		sourceToken.address,
+		sourceToken.decimals,
+		sourceToken.symbol,
+		sourceToken.name
 	);
-	const route = new Route([pair], WETH[destToken.chainId]);
+	const destToken = new Token(
+		ChainId.MAINNET,
+		destinationToken.address,
+		destinationToken.decimals,
+		destinationToken.symbol,
+		destinationToken.name
+	);
+
+	const tokenPair = await Fetcher.fetchPairData(destToken, srcToken);
+
+	const route = new Route([tokenPair], srcToken);
+
 	const trade = new Trade(
 		route,
-		new TokenAmount(WETH[destToken.chainId], '10000000'),
+		new TokenAmount(srcToken, web3.utils.toWei(sourceQuantity)),
 		TradeType.EXACT_INPUT
 	);
 
