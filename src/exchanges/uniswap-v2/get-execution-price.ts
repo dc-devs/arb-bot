@@ -1,6 +1,5 @@
 import formatPrice from '../../utils/formatPrice';
 import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
-
 import {
 	Route,
 	Token,
@@ -17,52 +16,56 @@ const getExecutionPrice = async ({
 	destinationToken,
 	sourceQuantity = '1',
 }: GetExectutionPriceArgs) => {
-	const srcToken = new Token(
-		ChainId.MAINNET,
-		sourceToken.address,
-		sourceToken.decimals,
-		sourceToken.symbol,
-		sourceToken.name
-	);
-	const destToken = new Token(
-		ChainId.MAINNET,
-		destinationToken.address,
-		destinationToken.decimals,
-		destinationToken.symbol,
-		destinationToken.name
-	);
+	try {
+		const srcToken = new Token(
+			ChainId.MAINNET,
+			sourceToken.address,
+			sourceToken.decimals,
+			sourceToken.symbol,
+			sourceToken.name
+		);
+		const destToken = new Token(
+			ChainId.MAINNET,
+			destinationToken.address,
+			destinationToken.decimals,
+			destinationToken.symbol,
+			destinationToken.name
+		);
 
-	const tokenPair = await Fetcher.fetchPairData(destToken, srcToken);
+		const tokenPair = await Fetcher.fetchPairData(destToken, srcToken);
 
-	const route = new Route([tokenPair], srcToken);
+		const route = new Route([tokenPair], srcToken);
 
-	const trade = new Trade(
-		route,
-		new TokenAmount(srcToken, web3.utils.toWei(sourceQuantity)),
-		TradeType.EXACT_INPUT
-	);
+		const trade = new Trade(
+			route,
+			new TokenAmount(srcToken, web3.utils.toWei(sourceQuantity)),
+			TradeType.EXACT_INPUT
+		);
 
-	const readableExecutionPrice = parseFloat(
-		trade.executionPrice.toSignificant(6)
-	);
-	const readableNextMidPrice = parseFloat(
-		trade.nextMidPrice.toSignificant(6)
-	);
+		const readableExecutionPrice = parseFloat(
+			trade.executionPrice.toSignificant(6)
+		);
+		const readableNextMidPrice = parseFloat(
+			trade.nextMidPrice.toSignificant(6)
+		);
 
-	const formattedExpectedRate = formatPrice(readableExecutionPrice);
-	const formattedNextMidPrice = formatPrice(readableNextMidPrice);
+		const formattedExpectedRate = formatPrice(readableExecutionPrice);
+		const formattedNextMidPrice = formatPrice(readableNextMidPrice);
 
-	return {
-		exchange: 'Uniswap v2',
-		raw: {
-			expectedRate: readableExecutionPrice,
-			nextMidPrice: readableNextMidPrice,
-		},
-		formatted: {
-			expectedRate: formattedExpectedRate,
-			nextMidPrice: formattedNextMidPrice,
-		},
-	};
+		return {
+			exchange: 'Uniswap v2',
+			raw: {
+				expectedRate: readableExecutionPrice,
+				nextMidPrice: readableNextMidPrice,
+			},
+			formatted: {
+				expectedRate: formattedExpectedRate,
+				nextMidPrice: formattedNextMidPrice,
+			},
+		};
+	} catch (error) {
+		throw new Error(error);
+	}
 };
 
 export default getExecutionPrice;

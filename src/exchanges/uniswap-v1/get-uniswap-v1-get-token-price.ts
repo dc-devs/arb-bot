@@ -1,39 +1,42 @@
-import Web3 from 'web3';
-import to from 'await-to-js';
 import formatPrice from '../../utils/formatPrice';
 import getExchangeContract from './get-uniswap-v1-exchange-contract';
-import tokenSymbolAddressMap from '../../constants/token-symbol-address-map';
+import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
 
-const getTokenPrice = async (web3: Web3, tokenSymbol: string) => {
-	const oneEther = web3.utils.toWei('1', 'ether');
-	const tokenAddress = tokenSymbolAddressMap[tokenSymbol];
+const getTokenPrice = async ({
+	web3,
+	sourceToken,
+	destinationToken,
+	sourceQuantity = '1',
+}: GetExectutionPriceArgs) => {
+	try {
+		console.log(sourceToken);
+		const exhangeContract = await getExchangeContract(
+			web3,
+			destinationToken
+		);
 
-	const [exhangeContractError, exhangeContract] = await to(
-		getExchangeContract(web3, tokenAddress)
-	);
+		const tokenPriceWei = await exhangeContract?.methods
+			?.getEthToTokenInputPrice(web3.utils.toWei(sourceQuantity))
+			?.call();
 
-	if (exhangeContractError) {
-		throw exhangeContractError;
+		const readableTokenPrice = parseFloat(
+			web3.utils.fromWei(tokenPriceWei, 'ether')
+		);
+
+		const formattedTokenPrice = formatPrice(readableTokenPrice);
+
+		return {
+			exchange: 'Uniswap v1',
+			raw: {
+				expectedRate: readableTokenPrice,
+			},
+			formatted: {
+				expectedRate: formattedTokenPrice,
+			},
+		};
+	} catch (error) {
+		throw new Error(error);
 	}
-
-	const tokenPriceWei = await exhangeContract?.methods
-		?.getEthToTokenInputPrice(oneEther)
-		?.call();
-
-	const readableTokenPrice = parseFloat(
-		web3.utils.fromWei(tokenPriceWei, 'ether')
-	);
-	const formattedTokenPrice = formatPrice(readableTokenPrice);
-
-	return {
-		exchange: 'Uniswap v1',
-		raw: {
-			expectedRate: readableTokenPrice,
-		},
-		formatted: {
-			expectedRate: formattedTokenPrice,
-		},
-	};
 };
 
 export default getTokenPrice;
