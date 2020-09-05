@@ -58,6 +58,10 @@ const getExecutionPrice = async ({
 				expectedRate: readableExecutionPrice,
 				nextMidPrice: readableNextMidPrice,
 			},
+			rawString: {
+				expectedRate: readableExecutionPrice.toString(),
+				nextMidPrice: readableNextMidPrice.toString(),
+			},
 			formatted: {
 				expectedRate: formattedExpectedRate,
 				nextMidPrice: formattedNextMidPrice,

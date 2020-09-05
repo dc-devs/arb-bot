@@ -34,6 +34,10 @@ const getKyberExpectedRate = async ({
 				expectedRate: readableExpectedRate,
 				worstRate: readableWorstRate,
 			},
+			rawString: {
+				expectedRate: readableExpectedRate.toString(),
+				worstRate: readableWorstRate.toString(),
+			},
 			formatted: {
 				expectedRate: formattedExpectedRate,
 				worstRate: formattedWorstRate,

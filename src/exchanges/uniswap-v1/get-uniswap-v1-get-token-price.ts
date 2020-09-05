@@ -35,6 +35,9 @@ const getTokenPrice = async ({
 			raw: {
 				expectedRate: readableTokenPrice,
 			},
+			rawString: {
+				expectedRate: readableTokenPrice.toString(),
+			},
 			formatted: {
 				expectedRate: formattedTokenPrice,
 			},
