@@ -1,4 +1,4 @@
-import Trade from '../interfaces/Trade';
+import Trade from '../../interfaces/Trade';
 
 const sortTrades = (trades: Trade[]) => {
 	return trades.sort((a: Trade, b: Trade) => {

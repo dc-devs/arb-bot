@@ -1,7 +1,7 @@
 import { web3 } from '../../providers/web3';
 import tokens from '../../constants/tokens';
 import { infura } from '../../providers/infura';
-import formatPrice from '../../utils/formatPrice';
+import formatPrice from '../utils/format-price';
 import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
 import {

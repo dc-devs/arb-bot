@@ -1,6 +1,6 @@
 import { web3 } from '../../providers/web3';
 import TokenInterface from '../../interfaces/Token';
-import formatPrice from '../../utils/formatPrice';
+import formatPrice from '../utils/format-price';
 import getExchangeContract from './get-uniswap-v1-exchange-contract';
 
 interface GetTokenPriceArgs {

@@ -1,5 +1,5 @@
 import { web3 } from '../../providers/web3';
-import formatPrice from '../../utils/formatPrice';
+import formatPrice from '../utils/format-price';
 import getReadableRate from './utils/getReadbleRate';
 import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
 import getKyberNetworkProxyContract from './get-kyber-network-proxy-contract';

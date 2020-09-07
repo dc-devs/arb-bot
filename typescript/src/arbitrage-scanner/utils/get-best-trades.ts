@@ -1,5 +1,5 @@
 import Token from '../../interfaces/Token';
-import sortTrades from '../../utils/sort-trades';
+import sortTrades from './sort-trades';
 import getUniswapV2TradeData from '../../exchanges/uniswap-v2/get-uniswap-v2-trade-data';
 import getKyberNetworkTradeData from '../../exchanges/kyber-network/get-kyber-network-trade-data';
 
