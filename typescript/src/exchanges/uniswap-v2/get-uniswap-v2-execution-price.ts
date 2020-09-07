@@ -3,6 +3,7 @@ import tokens from '../../constants/tokens';
 import { infura } from '../../providers/infura';
 import formatPrice from '../../utils/formatPrice';
 import GetExpectedRatePriceArgs from '../../interfaces/args/get-expected-price-args';
+import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
 import {
 	Route,
 	Token,
@@ -64,23 +65,32 @@ const getUniswapV2ExecutionPrice = async ({
 
 		const formattedExpectedRate = formatPrice(readableExecutionPrice);
 		const formattedNextMidPrice = formatPrice(readableNextMidPrice);
+		const expectedDestinationTokenQuantity = getExpectedDestinationTokenQuantity(
+			{
+				sourceTokenQuantity,
+				expectedRate: readableExecutionPrice.toString(),
+			}
+		);
 
 		return {
 			exchange: 'Uniswap v2',
 			sourceTokenQuantity,
 			sourceToken: setSourceToken,
 			destinationToken: setDestinationToken,
-			raw: {
-				expectedRate: readableExecutionPrice,
-				nextMidPrice: readableNextMidPrice,
-			},
-			rawString: {
-				expectedRate: readableExecutionPrice.toString(),
-				nextMidPrice: readableNextMidPrice.toString(),
-			},
-			formatted: {
-				expectedRate: formattedExpectedRate,
-				nextMidPrice: formattedNextMidPrice,
+			expectedDestinationTokenQuantity,
+			expectedRates: {
+				raw: {
+					expectedRate: readableExecutionPrice,
+					nextMidPrice: readableNextMidPrice,
+				},
+				rawString: {
+					expectedRate: readableExecutionPrice.toString(),
+					nextMidPrice: readableNextMidPrice.toString(),
+				},
+				formatted: {
+					expectedRate: formattedExpectedRate,
+					nextMidPrice: formattedNextMidPrice,
+				},
 			},
 		};
 	} catch (error) {

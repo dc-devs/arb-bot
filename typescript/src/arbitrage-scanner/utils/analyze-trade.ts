@@ -4,16 +4,6 @@ interface GetArbitrageTradingInstructionsArgs {
 	outgoingExpectedRate: ExpectedRates;
 	incomingExpectedRate: ExpectedRates;
 }
-interface GetExpectedDestinationTokensArgs {
-	expectedRate: string;
-	sourceTokenQuantity: string;
-}
-const getExpectedDestinationTokens = ({
-	expectedRate,
-	sourceTokenQuantity,
-}: GetExpectedDestinationTokensArgs) => {
-	return parseFloat(expectedRate) * parseFloat(sourceTokenQuantity);
-};
 
 const getArbitrageTradingInstructions = ({
 	outgoingExpectedRate,
@@ -24,11 +14,9 @@ const getArbitrageTradingInstructions = ({
 		sourceToken: outgoingExpectedRate.sourceToken.symbol,
 		sourceTokenQuantity: outgoingExpectedRate.sourceTokenQuantity,
 		destinationToken: outgoingExpectedRate.destinationToken.symbol,
-		expectedRate: outgoingExpectedRate.rawString.expectedRate,
-		expectedDestinationTokenQuantity: getExpectedDestinationTokens({
-			expectedRate: outgoingExpectedRate.rawString.expectedRate,
-			sourceTokenQuantity: outgoingExpectedRate.sourceTokenQuantity,
-		}),
+		expectedRate: outgoingExpectedRate.expectedRates.rawString.expectedRate,
+		expectedDestinationTokenQuantity:
+			outgoingExpectedRate.expectedDestinationTokenQuantity,
 	};
 
 	const incomingTrade = {
@@ -36,11 +24,9 @@ const getArbitrageTradingInstructions = ({
 		sourceToken: incomingExpectedRate.sourceToken.symbol,
 		sourceTokenQuantity: incomingExpectedRate.sourceTokenQuantity,
 		destinationToken: incomingExpectedRate.destinationToken.symbol,
-		expectedRate: incomingExpectedRate.rawString.expectedRate,
-		expectedDestinationTokenQuantity: getExpectedDestinationTokens({
-			expectedRate: incomingExpectedRate.rawString.expectedRate,
-			sourceTokenQuantity: incomingExpectedRate.sourceTokenQuantity,
-		}),
+		expectedRate: incomingExpectedRate.expectedRates.rawString.expectedRate,
+		expectedDestinationTokenQuantity:
+			incomingExpectedRate.expectedDestinationTokenQuantity,
 	};
 
 	return {

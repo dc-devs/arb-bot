@@ -7,7 +7,7 @@ const { ETH, RSR } = tokens;
 const scan = async () => {
 	// setInterval(async () => {
 	try {
-		const sourceTokenQuantity = '2';
+		const sourceTokenQuantity = '1';
 
 		const bestOutgoingExpectedRate = await getBestExpectedRate({
 			sourceToken: ETH,
@@ -15,13 +15,11 @@ const scan = async () => {
 			destinationToken: RSR,
 		});
 
-		const sourceTokenQuantityInExpectedRate =
-			bestOutgoingExpectedRate.rawString.expectedRate;
-
 		const bestIncomingExpectedRate = await getBestExpectedRate({
 			sourceToken: RSR,
 			destinationToken: ETH,
-			sourceTokenQuantity: sourceTokenQuantityInExpectedRate,
+			sourceTokenQuantity:
+				bestOutgoingExpectedRate.expectedDestinationTokenQuantity,
 		});
 
 		const tradeResults = analyzeTrade({

@@ -23,7 +23,7 @@ const displayExpectedRates = ({
 
 	expectedRates.forEach((sortedExpectedRate: ExpectedRates) => {
 		displayData[sortedExpectedRate.exchange] =
-			sortedExpectedRate.formatted.expectedRate;
+			sortedExpectedRate.expectedRates.formatted.expectedRate;
 	});
 
 	console.table([displayData]);

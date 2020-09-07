@@ -12,14 +12,19 @@ export interface Formatted {
 	[key: string]: string;
 }
 
-export interface ExpectedRates {
-	sourceToken: Token;
-	destinationToken: Token;
-	sourceTokenQuantity: string;
-	exchange: string;
+export interface ExpectedRatesObj {
 	raw: Raw;
 	rawString: RawString;
 	formatted: Formatted;
+}
+
+export interface ExpectedRates {
+	exchange: string;
+	sourceToken: Token;
+	destinationToken: Token;
+	sourceTokenQuantity: string;
+	expectedDestinationTokenQuantity: string;
+	expectedRates: ExpectedRatesObj;
 }
 
 export default ExpectedRates;
