@@ -1,14 +1,14 @@
-import ExpectedRates from '../../interfaces/Expected-Rates';
+import ExpectedRates from '../../interfaces/Trade';
 
-interface GetArbitrageTradingInstructionsArgs {
+interface AnalyzeTradeArgs {
 	outgoingExpectedRate: ExpectedRates;
 	incomingExpectedRate: ExpectedRates;
 }
 
-const getArbitrageTradingInstructions = ({
+const analyzeTrade = ({
 	outgoingExpectedRate,
 	incomingExpectedRate,
-}: GetArbitrageTradingInstructionsArgs) => {
+}: AnalyzeTradeArgs) => {
 	const outgoingTrade = {
 		exchange: outgoingExpectedRate.exchange,
 		sourceToken: outgoingExpectedRate.sourceToken.symbol,
@@ -35,4 +35,4 @@ const getArbitrageTradingInstructions = ({
 	};
 };
 
-export default getArbitrageTradingInstructions;
+export default analyzeTrade;

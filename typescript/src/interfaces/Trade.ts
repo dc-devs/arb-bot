@@ -18,7 +18,7 @@ export interface ExpectedRatesObj {
 	formatted: Formatted;
 }
 
-export interface ExpectedRates {
+export interface Trade {
 	exchange: string;
 	sourceToken: Token;
 	destinationToken: Token;
@@ -27,4 +27,4 @@ export interface ExpectedRates {
 	expectedRates: ExpectedRatesObj;
 }
 
-export default ExpectedRates;
+export default Trade;

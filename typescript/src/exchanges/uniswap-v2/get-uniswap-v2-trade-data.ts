@@ -2,7 +2,7 @@ import { web3 } from '../../providers/web3';
 import tokens from '../../constants/tokens';
 import { infura } from '../../providers/infura';
 import formatPrice from '../../utils/formatPrice';
-import GetExpectedRatePriceArgs from '../../interfaces/args/get-expected-price-args';
+import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
 import {
 	Route,
@@ -16,11 +16,11 @@ import {
 
 const { WETH, ETH } = tokens;
 
-const getUniswapV2ExecutionPrice = async ({
+const getUniswapV2TradeData = async ({
 	sourceToken,
 	destinationToken,
 	sourceTokenQuantity = '1',
-}: GetExpectedRatePriceArgs) => {
+}: GetTradeDataArgs) => {
 	try {
 		const setSourceToken =
 			sourceToken.symbol === ETH.symbol ? WETH : sourceToken;
@@ -98,4 +98,4 @@ const getUniswapV2ExecutionPrice = async ({
 	}
 };
 
-export default getUniswapV2ExecutionPrice;
+export default getUniswapV2TradeData;

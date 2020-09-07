@@ -1,5 +1,5 @@
 import tokens from '../constants/tokens';
-import getBestExpectedRate from './utils/get-best-expected-rate';
+import getBestTrade from './utils/get-best-trade';
 import analyzeTrade from './utils/analyze-trade';
 
 const { ETH, RSR } = tokens;
@@ -9,22 +9,22 @@ const scan = async () => {
 	try {
 		const sourceTokenQuantity = '1';
 
-		const bestOutgoingExpectedRate = await getBestExpectedRate({
+		const bestOutgoingTrade = await getBestTrade({
 			sourceToken: ETH,
 			sourceTokenQuantity,
 			destinationToken: RSR,
 		});
 
-		const bestIncomingExpectedRate = await getBestExpectedRate({
+		const bestIncomingTrade = await getBestTrade({
 			sourceToken: RSR,
 			destinationToken: ETH,
 			sourceTokenQuantity:
-				bestOutgoingExpectedRate.expectedDestinationTokenQuantity,
+				bestOutgoingTrade.expectedDestinationTokenQuantity,
 		});
 
 		const tradeResults = analyzeTrade({
-			outgoingExpectedRate: bestOutgoingExpectedRate,
-			incomingExpectedRate: bestIncomingExpectedRate,
+			outgoingExpectedRate: bestOutgoingTrade,
+			incomingExpectedRate: bestIncomingTrade,
 		});
 
 		console.log(tradeResults);
