@@ -1,37 +1,34 @@
 import ExpectedRates from '../../interfaces/Trade';
 
 interface AnalyzeTradeArgs {
-	outgoingExpectedRate: ExpectedRates;
-	incomingExpectedRate: ExpectedRates;
+	outgoingTrade: ExpectedRates;
+	incomingTrade: ExpectedRates;
 }
 
-const analyzeTrade = ({
-	outgoingExpectedRate,
-	incomingExpectedRate,
-}: AnalyzeTradeArgs) => {
-	const outgoingTrade = {
-		exchange: outgoingExpectedRate.exchange,
-		sourceToken: outgoingExpectedRate.sourceToken.symbol,
-		sourceTokenQuantity: outgoingExpectedRate.sourceTokenQuantity,
-		destinationToken: outgoingExpectedRate.destinationToken.symbol,
-		expectedRate: outgoingExpectedRate.expectedRates.rawString.expectedRate,
+const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
+	const outgoingTradeData = {
+		exchange: outgoingTrade.exchange,
+		sourceToken: outgoingTrade.sourceToken.symbol,
+		sourceTokenQuantity: outgoingTrade.sourceTokenQuantity,
+		destinationToken: outgoingTrade.destinationToken.symbol,
+		expectedRate: outgoingTrade.expectedRates.rawString.expectedRate,
 		expectedDestinationTokenQuantity:
-			outgoingExpectedRate.expectedDestinationTokenQuantity,
+			outgoingTrade.expectedDestinationTokenQuantity,
 	};
 
-	const incomingTrade = {
-		exchange: incomingExpectedRate.exchange,
-		sourceToken: incomingExpectedRate.sourceToken.symbol,
-		sourceTokenQuantity: incomingExpectedRate.sourceTokenQuantity,
-		destinationToken: incomingExpectedRate.destinationToken.symbol,
-		expectedRate: incomingExpectedRate.expectedRates.rawString.expectedRate,
+	const incomingTradeData = {
+		exchange: incomingTrade.exchange,
+		sourceToken: incomingTrade.sourceToken.symbol,
+		sourceTokenQuantity: incomingTrade.sourceTokenQuantity,
+		destinationToken: incomingTrade.destinationToken.symbol,
+		expectedRate: incomingTrade.expectedRates.rawString.expectedRate,
 		expectedDestinationTokenQuantity:
-			incomingExpectedRate.expectedDestinationTokenQuantity,
+			incomingTrade.expectedDestinationTokenQuantity,
 	};
 
 	return {
-		outgoingTrade,
-		incomingTrade,
+		outgoingTrade: outgoingTradeData,
+		incomingTrade: incomingTradeData,
 	};
 };
 

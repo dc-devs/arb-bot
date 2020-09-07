@@ -23,8 +23,8 @@ const scan = async () => {
 		});
 
 		const tradeResults = analyzeTrade({
-			outgoingExpectedRate: bestOutgoingTrade,
-			incomingExpectedRate: bestIncomingTrade,
+			outgoingTrade: bestOutgoingTrade,
+			incomingTrade: bestIncomingTrade,
 		});
 
 		console.log(tradeResults);
