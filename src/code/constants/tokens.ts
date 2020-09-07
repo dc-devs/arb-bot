@@ -9,7 +9,7 @@ const tokens = {
 		symbol: 'RSR',
 		name: 'Reserve Rights',
 		decimals: 18,
-		address: '0x8762db106b2c2a0bccb3a80d1ed41273552616e8',
+		address: '0x8762db106B2c2A0bccB3A80d1Ed41273552616E8',
 	},
 	ETH: {
 		symbol: 'ETH',

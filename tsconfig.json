@@ -39,5 +39,10 @@
 		"skipLibCheck": true /* Skip type checking of declaration files. */,
 		"forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
 	},
-	"include": ["src", "node_modules/@types/puppeteer/index.d.ts"]
+	"include": [
+		"src",
+		"node_modules/@types/puppeteer/index.d.ts",
+		"test",
+		"uniswap-v2"
+	]
 }

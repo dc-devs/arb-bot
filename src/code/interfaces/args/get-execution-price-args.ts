@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import TokenInterface from '../../interfaces/Token';
+import TokenInterface from '../Token';
 
 interface GetExectutionPriceArgs {
 	web3: Web3;

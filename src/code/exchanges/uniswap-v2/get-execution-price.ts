@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import formatPrice from '../../utils/formatPrice';
 import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
 import {
@@ -17,6 +18,9 @@ const getExecutionPrice = async ({
 	sourceQuantity = '1',
 }: GetExectutionPriceArgs) => {
 	try {
+		const provider = new ethers.providers.JsonRpcProvider(
+			process.env.RPC_URL
+		);
 		const srcToken = new Token(
 			ChainId.MAINNET,
 			sourceToken.address,
@@ -32,8 +36,11 @@ const getExecutionPrice = async ({
 			destinationToken.name
 		);
 
-		const tokenPair = await Fetcher.fetchPairData(destToken, srcToken);
-
+		const tokenPair = await Fetcher.fetchPairData(
+			destToken,
+			srcToken,
+			provider
+		);
 		const route = new Route([tokenPair], srcToken);
 
 		const trade = new Trade(

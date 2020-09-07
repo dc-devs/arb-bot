@@ -8,7 +8,7 @@
 	"license": "",
 	"keywords": [],
 	"scripts": {
-		"start": "node build/app.js",
+		"start": "node build/code/app.js",
 		"build": "rimraf ./build && tsc",
 		"test": "ava"
 	},
@@ -22,6 +22,7 @@
 		"colors": "^1.4.0",
 		"console.table": "^0.10.0",
 		"dotenv": "^8.2.0",
+		"ethers": "^5.0.11",
 		"express": "^4.17.1",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
@@ -35,5 +36,14 @@
 		"prettier": "^1.19.1",
 		"rimraf": "^3.0.2",
 		"typescript": "^3.9.7"
+	},
+	"ava": {
+		"files": [
+			"build/test/**/*"
+		],
+		"concurrency": 5,
+		"failFast": true,
+		"failWithoutAssertions": false,
+		"verbose": true
 	}
 }
