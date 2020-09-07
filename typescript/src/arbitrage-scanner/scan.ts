@@ -1,4 +1,3 @@
-import Web3 from 'web3';
 import tokens from '../constants/tokens';
 import sortExpectedRates from '../utils/sort-expected-rates';
 import getUniswapV2ExecutionPrice from '../exchanges/uniswap-v2/get-execution-price';
@@ -6,20 +5,18 @@ import getKyberExpectedRate from '../exchanges/kyber-network/get-kyber-expected-
 
 const { WETH, ETH, RSR } = tokens;
 
-const scan = async (web3: Web3) => {
+const scan = async () => {
 	setInterval(async () => {
 		try {
 			// Get Outgoing Swap Prices
 			// -------------------------
 			const uniswapV2ExpectedRates_ETH_RSR = await getUniswapV2ExecutionPrice(
 				{
-					web3,
 					sourceToken: WETH,
 					destinationToken: RSR,
 				}
 			);
 			const kyberExpectedRates_ETH_RSR = await getKyberExpectedRate({
-				web3,
 				sourceToken: ETH,
 				destinationToken: RSR,
 			});
@@ -47,7 +44,6 @@ const scan = async (web3: Web3) => {
 			// Get Incoming Swap Prices
 			// ------------------------
 			const kyberExpectedRates_RSR_ETH = await getKyberExpectedRate({
-				web3,
 				sourceToken: RSR,
 				destinationToken: ETH,
 				sourceQuantity:
@@ -56,7 +52,6 @@ const scan = async (web3: Web3) => {
 
 			const uniswapV2ExpectedRates_RSR_ETH = await getUniswapV2ExecutionPrice(
 				{
-					web3,
 					sourceToken: RSR,
 					destinationToken: WETH,
 					sourceQuantity:

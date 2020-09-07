@@ -5,9 +5,7 @@ import arbitrageScanner from './arbitrage-scanner';
 	try {
 		await arbitrageScanner.start();
 	} catch (error) {
-		console.error('');
-		console.error(red(error));
-		console.error('');
+		console.error(`\n ${red(error)} \n`);
 		process.exit(1);
 	}
 })();

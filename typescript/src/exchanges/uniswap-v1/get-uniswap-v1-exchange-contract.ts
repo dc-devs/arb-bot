@@ -1,11 +1,11 @@
-import Web3 from 'web3';
+import { web3 } from '../../providers/web3';
 import Token from '../../interfaces/Token';
 import uniswapExhangeAbi from './constants/uniswap-exchange-abi';
 import getFactoryContract from './get-uniswap-v1-factory-contract';
 
-const getExchangeContract = async (web3: Web3, destinationToken: Token) => {
+const getExchangeContract = async (destinationToken: Token) => {
 	try {
-		const factoryContract = getFactoryContract(web3);
+		const factoryContract = getFactoryContract();
 
 		const exchangeAddress = await factoryContract.methods
 			.getExchange(destinationToken.address)

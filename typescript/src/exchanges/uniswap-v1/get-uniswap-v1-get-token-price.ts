@@ -1,24 +1,19 @@
-import Web3 from 'web3';
+import { web3 } from '../../providers/web3';
 import TokenInterface from '../../interfaces/Token';
 import formatPrice from '../../utils/formatPrice';
 import getExchangeContract from './get-uniswap-v1-exchange-contract';
 
 interface GetTokenPriceArgs {
-	web3: Web3;
 	destinationToken: TokenInterface;
 	sourceQuantity?: string;
 }
 
 const getTokenPrice = async ({
-	web3,
 	destinationToken,
 	sourceQuantity = '1',
 }: GetTokenPriceArgs) => {
 	try {
-		const exhangeContract = await getExchangeContract(
-			web3,
-			destinationToken
-		);
+		const exhangeContract = await getExchangeContract(destinationToken);
 
 		const tokenPriceWei = await exhangeContract?.methods
 			?.getEthToTokenInputPrice(web3.utils.toWei(sourceQuantity))

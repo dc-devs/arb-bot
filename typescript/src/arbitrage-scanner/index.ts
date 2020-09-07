@@ -1,3 +1,3 @@
-import start from './start-arbitrage-scanner';
+import start from './scan';
 
 export default { start };

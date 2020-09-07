@@ -1,4 +1,5 @@
-import { ethers } from 'ethers';
+import { web3 } from '../../providers/web3';
+import { infura } from '../../providers/infura';
 import formatPrice from '../../utils/formatPrice';
 import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
 import {
@@ -12,15 +13,11 @@ import {
 } from '@uniswap/sdk';
 
 const getExecutionPrice = async ({
-	web3,
 	sourceToken,
 	destinationToken,
 	sourceQuantity = '1',
 }: GetExectutionPriceArgs) => {
 	try {
-		const provider = new ethers.providers.JsonRpcProvider(
-			process.env.RPC_URL
-		);
 		const srcToken = new Token(
 			ChainId.MAINNET,
 			sourceToken.address,
@@ -39,7 +36,7 @@ const getExecutionPrice = async ({
 		const tokenPair = await Fetcher.fetchPairData(
 			destToken,
 			srcToken,
-			provider
+			infura
 		);
 		const route = new Route([tokenPair], srcToken);
 
