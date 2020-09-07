@@ -1,5 +1,5 @@
-import Token from '../interfaces/Token';
-import ExpectedRates from '../interfaces/Expected-Rates';
+import Token from '../../interfaces/Token';
+import ExpectedRates from '../../interfaces/Expected-Rates';
 
 interface DisplayData {
 	[key: string]: number | string;

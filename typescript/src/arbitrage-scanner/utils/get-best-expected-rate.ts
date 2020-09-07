@@ -1,4 +1,4 @@
-import Token from '../interfaces/Token';
+import Token from '../../interfaces/Token';
 import getExpectedRates from './get-expected-rates';
 
 interface GetBestExpectedRateArgs {
