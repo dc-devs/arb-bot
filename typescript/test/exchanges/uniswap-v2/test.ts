@@ -1,8 +1,8 @@
 import test from 'ava';
 import Web3 from 'web3';
 import dotenv from 'dotenv';
-import tokens from '../../../code/constants/tokens';
-import getUniswapV2ExecutionPrice from '../../../code/exchanges/uniswap-v2/get-execution-price';
+import tokens from '../../../src/constants/tokens';
+import getUniswapV2ExecutionPrice from '../../../src/exchanges/uniswap-v2/get-execution-price';
 
 const { WETH, RSR } = tokens;
 

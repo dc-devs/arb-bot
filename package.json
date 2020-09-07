@@ -8,7 +8,7 @@
 	"license": "",
 	"keywords": [],
 	"scripts": {
-		"start": "node build/code/app.js",
+		"start": "node build/src/app.js",
 		"build": "rimraf ./build && tsc",
 		"test": "ava"
 	},
