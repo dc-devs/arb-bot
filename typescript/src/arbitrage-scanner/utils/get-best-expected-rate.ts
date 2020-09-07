@@ -4,18 +4,18 @@ import getExpectedRates from './get-expected-rates';
 interface GetBestExpectedRateArgs {
 	sourceToken: Token;
 	destinationToken: Token;
-	sourceQuantity?: string;
+	sourceTokenQuantity?: string;
 }
 
 const getBestExpectedRate = async ({
 	sourceToken,
 	destinationToken,
-	sourceQuantity,
+	sourceTokenQuantity,
 }: GetBestExpectedRateArgs) => {
 	const expectedRates = await getExpectedRates({
 		sourceToken,
 		destinationToken,
-		sourceQuantity,
+		sourceTokenQuantity,
 	});
 
 	return expectedRates[0];

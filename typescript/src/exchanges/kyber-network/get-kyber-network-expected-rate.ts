@@ -7,13 +7,13 @@ import getKyberNetworkProxyContract from './get-kyber-network-proxy-contract';
 const getKyberNetworkExpectedRate = async ({
 	sourceToken,
 	destinationToken,
-	sourceQuantity = '1',
+	sourceTokenQuantity = '1',
 }: GetExpectedRatePriceArgs) => {
 	try {
 		const kyberNetworkProxyContract = getKyberNetworkProxyContract();
 		const srcTokenAddress = sourceToken.address;
 		const destTokenAddress = destinationToken.address;
-		const srcQty = web3.utils.toWei(sourceQuantity);
+		const srcQty = web3.utils.toWei(sourceTokenQuantity);
 		const kyberExpectedRates = await kyberNetworkProxyContract.methods
 			.getExpectedRate(srcTokenAddress, destTokenAddress, srcQty)
 			.call();
@@ -28,6 +28,7 @@ const getKyberNetworkExpectedRate = async ({
 
 		return {
 			exchange: 'Kyber Network',
+			sourceTokenQuantity,
 			sourceToken,
 			destinationToken,
 			raw: {

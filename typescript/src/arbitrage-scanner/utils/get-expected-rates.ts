@@ -6,24 +6,24 @@ import getKyberNetworkExpectedRate from '../../exchanges/kyber-network/get-kyber
 interface GetExpectedRatesArgs {
 	sourceToken: Token;
 	destinationToken: Token;
-	sourceQuantity?: string;
+	sourceTokenQuantity?: string;
 }
 
 const getExeptedRates = async ({
 	sourceToken,
 	destinationToken,
-	sourceQuantity,
+	sourceTokenQuantity,
 }: GetExpectedRatesArgs) => {
 	const uniswapV2ExpectedRates = await getUniswapV2ExecutionPrice({
 		sourceToken,
 		destinationToken,
-		sourceQuantity,
+		sourceTokenQuantity,
 	});
 
 	const kyberExpectedRates = await getKyberNetworkExpectedRate({
 		sourceToken,
 		destinationToken,
-		sourceQuantity,
+		sourceTokenQuantity,
 	});
 
 	const sortedExpectedRates = sortExpectedRates([

@@ -15,6 +15,7 @@ export interface Formatted {
 export interface ExpectedRates {
 	sourceToken: Token;
 	destinationToken: Token;
+	sourceTokenQuantity: string;
 	exchange: string;
 	raw: Raw;
 	rawString: RawString;

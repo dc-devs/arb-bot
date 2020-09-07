@@ -15,11 +15,18 @@ test('getUniswapV2ExecutionPrice', async (t) => {
 		destinationToken: RSR,
 	});
 
-	const { exchange, raw, rawString, formatted } = exectutionPrice;
+	const {
+		raw,
+		exchange,
+		rawString,
+		formatted,
+		sourceTokenQuantity,
+	} = exectutionPrice;
 
 	t.assert(exchange === 'Uniswap v2');
 	t.assert(typeof raw.expectedRate === 'number');
 	t.assert(typeof raw.nextMidPrice === 'number');
+	t.assert(typeof sourceTokenQuantity === 'string');
 	t.assert(typeof rawString.expectedRate === 'string');
 	t.assert(typeof rawString.nextMidPrice === 'string');
 	t.assert(typeof formatted.expectedRate === 'string');

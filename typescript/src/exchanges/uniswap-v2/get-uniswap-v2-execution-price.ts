@@ -18,7 +18,7 @@ const { WETH, ETH } = tokens;
 const getUniswapV2ExecutionPrice = async ({
 	sourceToken,
 	destinationToken,
-	sourceQuantity = '1',
+	sourceTokenQuantity = '1',
 }: GetExpectedRatePriceArgs) => {
 	try {
 		const setSourceToken =
@@ -51,7 +51,7 @@ const getUniswapV2ExecutionPrice = async ({
 
 		const trade = new Trade(
 			route,
-			new TokenAmount(srcToken, web3.utils.toWei(sourceQuantity)),
+			new TokenAmount(srcToken, web3.utils.toWei(sourceTokenQuantity)),
 			TradeType.EXACT_INPUT
 		);
 
@@ -67,6 +67,7 @@ const getUniswapV2ExecutionPrice = async ({
 
 		return {
 			exchange: 'Uniswap v2',
+			sourceTokenQuantity,
 			sourceToken: setSourceToken,
 			destinationToken: setDestinationToken,
 			raw: {

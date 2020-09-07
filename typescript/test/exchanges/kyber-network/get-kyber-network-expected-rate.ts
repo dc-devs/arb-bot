@@ -15,11 +15,18 @@ test('getKyberNetworkExpectedRate', async (t) => {
 		destinationToken: RSR,
 	});
 
-	const { exchange, raw, rawString, formatted } = expectedRate;
+	const {
+		raw,
+		exchange,
+		rawString,
+		formatted,
+		sourceTokenQuantity,
+	} = expectedRate;
 
 	t.assert(exchange === 'Kyber Network');
-	t.assert(typeof raw.expectedRate === 'number');
 	t.assert(typeof raw.worstRate === 'number');
+	t.assert(typeof raw.expectedRate === 'number');
+	t.assert(typeof sourceTokenQuantity === 'string');
 	t.assert(typeof rawString.expectedRate === 'string');
 	t.assert(typeof rawString.worstRate === 'string');
 	t.assert(typeof formatted.expectedRate === 'string');
