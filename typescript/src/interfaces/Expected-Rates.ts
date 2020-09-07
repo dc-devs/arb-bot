@@ -1,3 +1,5 @@
+import Token from '../interfaces/Token';
+
 export interface Raw {
 	[key: string]: number;
 }
@@ -11,6 +13,8 @@ export interface Formatted {
 }
 
 export interface ExpectedRates {
+	sourceToken: Token;
+	destinationToken: Token;
 	exchange: string;
 	raw: Raw;
 	rawString: RawString;

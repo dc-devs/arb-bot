@@ -1,7 +1,8 @@
 import { web3 } from '../../providers/web3';
+import tokens from '../../constants/tokens';
 import { infura } from '../../providers/infura';
 import formatPrice from '../../utils/formatPrice';
-import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
+import GetExpectedRatePriceArgs from '../../interfaces/args/get-expected-price-args';
 import {
 	Route,
 	Token,
@@ -12,25 +13,33 @@ import {
 	TokenAmount,
 } from '@uniswap/sdk';
 
-const getExecutionPrice = async ({
+const { WETH, ETH } = tokens;
+
+const getUniswapV2ExecutionPrice = async ({
 	sourceToken,
 	destinationToken,
 	sourceQuantity = '1',
-}: GetExectutionPriceArgs) => {
+}: GetExpectedRatePriceArgs) => {
 	try {
+		const setSourceToken =
+			sourceToken.symbol === ETH.symbol ? WETH : sourceToken;
+		const setDestinationToken =
+			destinationToken.symbol === ETH.symbol ? WETH : destinationToken;
+
 		const srcToken = new Token(
 			ChainId.MAINNET,
-			sourceToken.address,
-			sourceToken.decimals,
-			sourceToken.symbol,
-			sourceToken.name
+			setSourceToken.address,
+			setSourceToken.decimals,
+			setSourceToken.symbol,
+			setSourceToken.name
 		);
+
 		const destToken = new Token(
 			ChainId.MAINNET,
-			destinationToken.address,
-			destinationToken.decimals,
-			destinationToken.symbol,
-			destinationToken.name
+			setDestinationToken.address,
+			setDestinationToken.decimals,
+			setDestinationToken.symbol,
+			setDestinationToken.name
 		);
 
 		const tokenPair = await Fetcher.fetchPairData(
@@ -58,6 +67,8 @@ const getExecutionPrice = async ({
 
 		return {
 			exchange: 'Uniswap v2',
+			sourceToken: setSourceToken,
+			destinationToken: setDestinationToken,
 			raw: {
 				expectedRate: readableExecutionPrice,
 				nextMidPrice: readableNextMidPrice,
@@ -76,4 +87,4 @@ const getExecutionPrice = async ({
 	}
 };
 
-export default getExecutionPrice;
+export default getUniswapV2ExecutionPrice;

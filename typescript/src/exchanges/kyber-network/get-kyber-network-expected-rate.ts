@@ -1,16 +1,16 @@
 import { web3 } from '../../providers/web3';
 import formatPrice from '../../utils/formatPrice';
 import getReadableRate from './utils/getReadbleRate';
-import GetExectutionPriceArgs from '../../interfaces/args/get-execution-price-args';
+import GetExpectedRatePriceArgs from '../../interfaces/args/get-expected-price-args';
 import getKyberNetworkProxyContract from './get-kyber-network-proxy-contract';
 
-const getKyberExpectedRate = async ({
+const getKyberNetworkExpectedRate = async ({
 	sourceToken,
 	destinationToken,
 	sourceQuantity = '1',
-}: GetExectutionPriceArgs) => {
+}: GetExpectedRatePriceArgs) => {
 	try {
-		const kyberNetworkProxyContract = await getKyberNetworkProxyContract();
+		const kyberNetworkProxyContract = getKyberNetworkProxyContract();
 		const srcTokenAddress = sourceToken.address;
 		const destTokenAddress = destinationToken.address;
 		const srcQty = web3.utils.toWei(sourceQuantity);
@@ -28,6 +28,8 @@ const getKyberExpectedRate = async ({
 
 		return {
 			exchange: 'Kyber Network',
+			sourceToken,
+			destinationToken,
 			raw: {
 				expectedRate: readableExpectedRate,
 				worstRate: readableWorstRate,
@@ -46,4 +48,4 @@ const getKyberExpectedRate = async ({
 	}
 };
 
-export default getKyberExpectedRate;
+export default getKyberNetworkExpectedRate;

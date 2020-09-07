@@ -1,3 +1,3 @@
-import start from './scan';
+import start from './start';
 
 export default { start };

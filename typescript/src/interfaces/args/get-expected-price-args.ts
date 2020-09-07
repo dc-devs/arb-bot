@@ -1,9 +1,9 @@
 import TokenInterface from '../Token';
 
-interface GetExectutionPriceArgs {
+interface GetExpectedRatePriceArgs {
 	sourceToken: TokenInterface;
 	destinationToken: TokenInterface;
 	sourceQuantity?: string;
 }
 
-export default GetExectutionPriceArgs;
+export default GetExpectedRatePriceArgs;
