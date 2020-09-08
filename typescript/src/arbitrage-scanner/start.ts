@@ -6,7 +6,7 @@ const { RSR, ETH } = tokens;
 
 const scan = async () => {
 	// setInterval(async () => {
-	const sourceTokenQuantity = '1';
+	const sourceTokenQuantity = '2';
 	const tradePairDataResults = await Promise.all([
 		getTradePairData({
 			baseToken: ETH,
