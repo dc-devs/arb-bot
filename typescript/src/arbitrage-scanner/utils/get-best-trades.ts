@@ -14,21 +14,22 @@ const getBestTrades = async ({
 	destinationToken,
 	sourceTokenQuantity,
 }: GetBestTradesArgs) => {
-	const uniswapV2Trade = await getUniswapV2TradeData({
-		sourceToken,
-		destinationToken,
-		sourceTokenQuantity,
-	});
+	const trades = await Promise.all([
+		getUniswapV2TradeData({
+			sourceToken,
+			destinationToken,
+			sourceTokenQuantity,
+		}),
+		getKyberNetworkTradeData({
+			sourceToken,
+			destinationToken,
+			sourceTokenQuantity,
+		}),
+	]);
 
-	const kyberNetworkTrade = await getKyberNetworkTradeData({
-		sourceToken,
-		destinationToken,
-		sourceTokenQuantity,
-	});
+	const sortedTrades = sortTrades(trades);
 
-	const sortedExpectedRates = sortTrades([uniswapV2Trade, kyberNetworkTrade]);
-
-	return sortedExpectedRates;
+	return sortedTrades;
 };
 
 export default getBestTrades;

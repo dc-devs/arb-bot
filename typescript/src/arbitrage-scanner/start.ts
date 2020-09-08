@@ -1,36 +1,27 @@
 import tokens from '../constants/tokens';
-import getBestTrade from './utils/get-best-trade';
-import analyzeTrade from './utils/analyze-trade';
+import getTradePairData from './utils/get-trade-pair-data';
+import getBestTradePair from './utils/get-best-trade-pair';
 
-const { ETH, RSR } = tokens;
+const { RSR, ETH } = tokens;
 
 const scan = async () => {
 	// setInterval(async () => {
-	try {
-		const sourceTokenQuantity = '1';
-
-		const bestOutgoingTrade = await getBestTrade({
-			sourceToken: ETH,
+	const sourceTokenQuantity = '1';
+	const tradePairDataResults = await Promise.all([
+		getTradePairData({
+			baseToken: ETH,
+			swapToken: RSR,
 			sourceTokenQuantity,
-			destinationToken: RSR,
-		});
+		}),
+		getTradePairData({
+			baseToken: RSR,
+			swapToken: ETH,
+			sourceTokenQuantity,
+		}),
+	]);
 
-		const bestIncomingTrade = await getBestTrade({
-			sourceToken: RSR,
-			destinationToken: ETH,
-			sourceTokenQuantity:
-				bestOutgoingTrade.expectedDestinationTokenQuantity,
-		});
-
-		const tradeResults = analyzeTrade({
-			outgoingTrade: bestOutgoingTrade,
-			incomingTrade: bestIncomingTrade,
-		});
-
-		console.log(tradeResults);
-	} catch (error) {
-		throw error;
-	}
+	const bestTradePair = getBestTradePair(tradePairDataResults);
+	console.log(bestTradePair);
 	// }, 1000);
 };
 

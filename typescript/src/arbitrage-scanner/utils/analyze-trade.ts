@@ -26,9 +26,14 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 			incomingTrade.expectedDestinationTokenQuantity,
 	};
 
+	const expectedTradeGain =
+		parseFloat(incomingTradeData.expectedDestinationTokenQuantity) -
+		parseFloat(outgoingTradeData.sourceTokenQuantity);
+
 	return {
 		outgoingTrade: outgoingTradeData,
 		incomingTrade: incomingTradeData,
+		expectedTradeGain,
 	};
 };
 
