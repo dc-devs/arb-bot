@@ -32,7 +32,7 @@ const getKyberNetworkTradeData = async ({
 				expectedRate: readableExpectedRate.toString(),
 			}
 		);
-
+		// TODO: USE WEB3 To Calc Gas Price..
 		return {
 			exchange: 'Kyber Network',
 			sourceTokenQuantity,

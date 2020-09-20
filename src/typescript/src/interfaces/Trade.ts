@@ -1,4 +1,4 @@
-import Token from '../interfaces/Token';
+import Token from './Token';
 
 export interface Raw {
 	[key: string]: number;
@@ -23,6 +23,7 @@ export interface Trade {
 	sourceToken: Token;
 	destinationToken: Token;
 	sourceTokenQuantity: string;
+	liquidityProviderFee?: string;
 	expectedDestinationTokenQuantity: string;
 	expectedRates: ExpectedRatesObj;
 }

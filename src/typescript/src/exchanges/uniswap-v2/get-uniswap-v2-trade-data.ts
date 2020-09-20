@@ -48,11 +48,13 @@ const getUniswapV2TradeData = async ({
 			srcToken,
 			infura
 		);
+
 		const route = new Route([tokenPair], srcToken);
+		const amountIn = web3.utils.toWei(sourceTokenQuantity);
 
 		const trade = new Trade(
 			route,
-			new TokenAmount(srcToken, web3.utils.toWei(sourceTokenQuantity)),
+			new TokenAmount(srcToken, amountIn),
 			TradeType.EXACT_INPUT
 		);
 
@@ -72,8 +74,13 @@ const getUniswapV2TradeData = async ({
 			}
 		);
 
+		const liquidityProviderFee = (
+			Number(sourceTokenQuantity) * 0.003
+		).toString();
+
 		return {
 			exchange: 'Uniswap v2',
+			liquidityProviderFee,
 			sourceTokenQuantity,
 			sourceToken: setSourceToken,
 			destinationToken: setDestinationToken,
