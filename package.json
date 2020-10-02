@@ -24,23 +24,21 @@
 		"await-to-js": "^2.1.1",
 		"axios": "^0.20.0",
 		"colors": "^1.4.0",
-		"console.table": "^0.10.0",
 		"dotenv": "^8.2.0",
 		"ethers": "^5.0.11",
-		"express": "^4.17.1",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
 		"numeral": "^2.0.6",
 		"web3": "^1.2.11"
 	},
 	"devDependencies": {
-		"@types/express": "^4.17.7",
 		"@types/node": "^14.0.27",
 		"ava": "^2.4.0",
 		"chai": "^4.2.0",
 		"chai-bn": "^0.2.1",
 		"prettier": "^1.19.1",
 		"rimraf": "^3.0.2",
+		"typechain": "^2.0.0",
 		"typescript": "^3.9.7"
 	},
 	"ava": {
