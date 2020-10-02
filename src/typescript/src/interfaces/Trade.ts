@@ -23,7 +23,7 @@ export interface Trade {
 	sourceToken: Token;
 	destinationToken: Token;
 	sourceTokenQuantity: string;
-	liquidityProviderFee?: string;
+	platformFees?: string;
 	expectedDestinationTokenQuantity: string;
 	expectedRates: ExpectedRatesObj;
 }

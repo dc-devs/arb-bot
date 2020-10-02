@@ -8,6 +8,7 @@ interface AnalyzeTradeArgs {
 const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 	const outgoingTradeData = {
 		exchange: outgoingTrade.exchange,
+		platformFees: outgoingTrade.platformFees,
 		sourceToken: outgoingTrade.sourceToken.symbol,
 		sourceTokenQuantity: outgoingTrade.sourceTokenQuantity,
 		destinationToken: outgoingTrade.destinationToken.symbol,
@@ -18,6 +19,7 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 
 	const incomingTradeData = {
 		exchange: incomingTrade.exchange,
+		platformFees: incomingTrade.platformFees,
 		sourceToken: incomingTrade.sourceToken.symbol,
 		sourceTokenQuantity: incomingTrade.sourceTokenQuantity,
 		destinationToken: incomingTrade.destinationToken.symbol,
