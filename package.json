@@ -8,9 +8,10 @@
 	"license": "",
 	"keywords": [],
 	"scripts": {
-		"start": "node build/src/app.js",
 		"build": "rimraf ./build && tsc",
-		"test": "mocha -r ts-node/register src/typescript/test/**/*.test.ts"
+		"test": "mocha -r ts-node/register test/**/*.test.ts",
+		"start:arbBot": "node build/src/app.js",
+		"start": "npm run build && npm run test && npm run start:arbBot"
 	},
 	"dependencies": {
 		"@chainlink/contracts": "0.0.10",
