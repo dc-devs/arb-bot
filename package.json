@@ -10,7 +10,7 @@
 	"scripts": {
 		"start": "node build/src/app.js",
 		"build": "rimraf ./build && tsc",
-		"test": "ava"
+		"test": "mocha -r ts-node/register src/typescript/test/**/*.test.ts"
 	},
 	"dependencies": {
 		"@chainlink/contracts": "0.0.10",
@@ -32,22 +32,18 @@
 		"web3": "^1.2.11"
 	},
 	"devDependencies": {
+		"@types/bn.js": "^4.11.6",
+		"@types/chai": "^4.2.12",
+		"@types/mocha": "^8.0.3",
 		"@types/node": "^14.0.27",
-		"ava": "^2.4.0",
+		"@types/numeral": "0.0.28",
+		"@types/web3": "^1.2.2",
 		"chai": "^4.2.0",
 		"chai-bn": "^0.2.1",
+		"mocha": "^8.1.3",
 		"prettier": "^1.19.1",
 		"rimraf": "^3.0.2",
-		"typechain": "^2.0.0",
+		"ts-node": "^9.0.0",
 		"typescript": "^3.9.7"
-	},
-	"ava": {
-		"files": [
-			"build/test/**/*"
-		],
-		"concurrency": 5,
-		"failFast": true,
-		"failWithoutAssertions": false,
-		"verbose": true
 	}
 }
