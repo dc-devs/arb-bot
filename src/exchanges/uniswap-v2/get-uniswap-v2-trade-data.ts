@@ -32,7 +32,7 @@ const getUniswapV2TradeData = async ({
 			sourceToken.symbol === ETH.symbol ? WETH : sourceToken;
 		const setDestinationToken =
 			destinationToken.symbol === ETH.symbol ? WETH : destinationToken;
-		console.log(ChainId);
+
 		// getUniswapTokens
 		// -------------------
 		const srcToken = new Token(

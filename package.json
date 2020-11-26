@@ -9,7 +9,7 @@
 	"keywords": [],
 	"scripts": {
 		"build": "rimraf ./build && tsc",
-		"test": "mocha -r ts-node/register test/**/*.test.ts --timeout=999000",
+		"test": "mocha -r ts-node/register test/**/*.test.ts test/**/**/*.test.ts --timeout=999000",
 		"start:arbBot": "node build/src/app.js",
 		"start": "npm run build && npm run test && npm run start:arbBot"
 	},

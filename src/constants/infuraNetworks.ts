@@ -3,6 +3,7 @@ interface Networks {
 }
 
 const networks = {
+	'1': 'homestead',
 	MAINNET: 'homestead',
 } as Networks;
 
