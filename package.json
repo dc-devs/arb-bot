@@ -9,7 +9,7 @@
 	"keywords": [],
 	"scripts": {
 		"build": "rimraf ./build && tsc",
-		"test": "mocha -r ts-node/register test/**/*.test.ts",
+		"test": "mocha -r ts-node/register test/**/*.test.ts --timeout=999000",
 		"start:arbBot": "node build/src/app.js",
 		"start": "npm run build && npm run test && npm run start:arbBot"
 	},
@@ -26,7 +26,7 @@
 		"axios": "^0.20.0",
 		"colors": "^1.4.0",
 		"dotenv": "^8.2.0",
-		"ethers": "^5.0.11",
+		"ethers": "^5.0.15",
 		"moment": "^2.27.0",
 		"moment-timezone": "^0.5.31",
 		"numeral": "^2.0.6",

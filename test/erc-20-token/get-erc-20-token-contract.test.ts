@@ -1,0 +1,47 @@
+import chai from 'chai';
+import dotenv from 'dotenv';
+import getErc20TokenContract from '../../src/erc-20-token/get-erc-20-token-contract';
+import infuraNetworks from '../../src/constants/infuraNetworks';
+import tokens from '../../src/constants/tokens';
+
+const { expect } = chai;
+const { RSR } = tokens;
+
+before(() => {
+	dotenv.config();
+});
+
+describe('getErc20TokenContract', async () => {
+	it('should return ethers account for given private key', async () => {
+		const contract = getErc20TokenContract('MAINNET', RSR.symbol);
+		const { functions, signer, provider } = contract;
+		const signerAddress = await signer.getAddress();
+		const network = await provider.getNetwork();
+
+		// Expected Connection
+		expect(network.name).to.equal(infuraNetworks.MAINNET);
+		expect(typeof network.ensAddress).to.equal('string');
+
+		// Expected Signer
+		expect(signerAddress).to.equal(process.env.METAMASK_ADDRESS);
+
+		// Expected Functions
+		expect(typeof functions['name()']).to.equal('function');
+		expect(typeof functions['approve(address,uint256)']).to.equal(
+			'function'
+		);
+		expect(typeof functions['totalSupply()']).to.equal('function');
+		expect(
+			typeof functions['transferFrom(address,address,uint256)']
+		).to.equal('function');
+		expect(typeof functions['decimals()']).to.equal('function');
+		expect(typeof functions['balanceOf(address)']).to.equal('function');
+		expect(typeof functions['symbol()']).to.equal('function');
+		expect(typeof functions['transfer(address,uint256)']).to.equal(
+			'function'
+		);
+		expect(typeof functions['allowance(address,address)']).to.equal(
+			'function'
+		);
+	});
+});

@@ -15,7 +15,7 @@ const tokens = {
 		symbol: 'ETH',
 		name: 'Ether',
 		decimals: 18,
-		address: '0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+		address: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
 	},
 	WETH: {
 		symbol: 'WETH',
