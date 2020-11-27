@@ -115,7 +115,7 @@ const swapExactTokensForTokens = async ({
 			path,
 			to,
 			deadline,
-			{ gasLimit: 85000 }
+			{ gasPrice: 0.00000005, gasLimit: 85000 }
 		);
 
 		console.log('--- transaction', transaction);

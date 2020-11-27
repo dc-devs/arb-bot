@@ -4,20 +4,20 @@ import getTradePairData from './utils/get-trade-pair-data';
 import getBestTradePair from './utils/get-best-trade-pair';
 import getGasFeesPrice from './utils/get-gas-fees-price';
 
-const { RSR, ETH } = tokens;
+const { RSR, WETH } = tokens;
 
 const start = async () => {
 	// setInterval(async () => {
 	const tradePairDataResults = await Promise.all([
 		getTradePairData({
-			baseToken: ETH,
+			baseToken: WETH,
 			swapToken: RSR,
-			sourceTokenQuantity: '.01',
+			sourceTokenQuantity: '1',
 		}),
 		getTradePairData({
 			baseToken: RSR,
-			swapToken: ETH,
-			sourceTokenQuantity: '60000',
+			swapToken: WETH,
+			sourceTokenQuantity: '10000',
 		}),
 	]);
 

@@ -1,4 +1,14 @@
 interface ChainIds {
+	'1': string;
+	'3': string;
+	'4': string;
+	'5': string;
+	'42': string;
+	MAINNET: number;
+	ROPSTEN: number;
+	RINKEBY: number;
+	GORLI: number;
+	KOVAN: number;
 	[key: string]: string | number;
 }
 
@@ -11,7 +21,7 @@ const chainIds = {
 	MAINNET: 1,
 	ROPSTEN: 3,
 	RINKEBY: 4,
-	GÖRLI: 5,
+	GORLI: 5,
 	KOVAN: 42,
 } as ChainIds;
 

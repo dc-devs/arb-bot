@@ -1,4 +1,6 @@
 interface Networks {
+	'1': string;
+	MAINNET: string;
 	[key: string]: string;
 }
 

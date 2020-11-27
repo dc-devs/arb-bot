@@ -1,8 +1,10 @@
 import chai from 'chai';
 import dotenv from 'dotenv';
+import getAccount from '../../src/ethers/get-account';
 import getErc20TokenContract from '../../src/erc-20-token/get-erc-20-token-contract';
 import infuraNetworks from '../../src/constants/infuraNetworks';
 import tokens from '../../src/constants/tokens';
+import chainIds from '../../src/constants/chain-ids';
 
 const { expect } = chai;
 const { RSR } = tokens;
@@ -13,7 +15,10 @@ before(() => {
 
 describe('getErc20TokenContract', async () => {
 	it('should return ethers account for given private key', async () => {
-		const contract = getErc20TokenContract('MAINNET', RSR.symbol);
+		const chainId = chainIds.MAINNET;
+		const privateKey = process.env.METAMASK_PRIVATE_KEY as string;
+		const account = getAccount(chainId, privateKey);
+		const contract = getErc20TokenContract(account, RSR.symbol);
 		const { functions, signer, provider } = contract;
 		const signerAddress = await signer.getAddress();
 		const network = await provider.getNetwork();

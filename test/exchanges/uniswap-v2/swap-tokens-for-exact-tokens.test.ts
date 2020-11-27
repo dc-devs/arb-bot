@@ -13,7 +13,7 @@ before(() => {
 describe('swapTokensForExactTokens', async () => {
 	xit('should return the trade transaction', async () => {
 		const tradeTransaction = await swapTokensForExactTokens({
-			sourceTokenQuantity: '.1',
+			sourceTokenQuantity: '.01',
 			sourceToken: WETH,
 			destinationToken: RSR,
 		});

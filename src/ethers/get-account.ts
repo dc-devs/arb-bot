@@ -4,8 +4,8 @@ import infuraNetworks from '../constants/infuraNetworks';
 
 dotenv.config();
 
-const getAccount = (networkName: string, privateKey: string) => {
-	const network = infuraNetworks[networkName];
+const getAccount = (chainId: number, privateKey: string) => {
+	const network = infuraNetworks[chainId];
 	const signer = new ethers.Wallet(privateKey);
 
 	const provider = new ethers.providers.InfuraProvider(network, {
