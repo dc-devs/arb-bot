@@ -37,7 +37,7 @@ const swapExactTokensForTokens = async ({
 
 		const estimatedGasUnits = await uniswapV2RouterContract.estimateGas.swapExactTokensForTokens(
 			amountIn,
-			amountOutMin.toString(),
+			amountOutMin,
 			path,
 			to,
 			deadline,

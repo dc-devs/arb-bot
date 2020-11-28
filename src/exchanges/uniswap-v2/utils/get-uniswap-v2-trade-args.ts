@@ -12,10 +12,12 @@ const getUniswapV2TradeArgs = ({
 	uniDestinationToken,
 }: GetUniswapV2TradeArgsArgs) => {
 	const slippageTolerance = new Percent('50', '10000'); // 50 bips, or 0.50%
-	const amountOutMin = uniTrade.minimumAmountOut(slippageTolerance).raw; // needs to be converted to e.g. hex
+	const amountOutMinBN = uniTrade.minimumAmountOut(slippageTolerance).raw; // needs to be converted to e.g. hex
 	const path = [uniSourceToken.address, uniDestinationToken.address];
 	const to = process.env.METAMASK_ADDRESS; // should be a checksummed recipient address
 	const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes from the current Unix time
+
+	const amountOutMin = amountOutMinBN.toString();
 
 	return {
 		amountOutMin,
