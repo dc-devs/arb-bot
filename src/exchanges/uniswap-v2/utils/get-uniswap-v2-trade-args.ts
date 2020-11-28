@@ -16,8 +16,7 @@ const getUniswapV2TradeArgs = ({
 	const path = [uniSourceToken.address, uniDestinationToken.address];
 	const to = process.env.METAMASK_ADDRESS; // should be a checksummed recipient address
 	const deadline = Math.floor(Date.now() / 1000) + 60 * 20; // 20 minutes from the current Unix time
-	// ETHER TO SEND?
-	// const value = trade.inputAmount.raw; // // needs to be converted to e.g. hex
+
 	return {
 		amountOutMin,
 		path,

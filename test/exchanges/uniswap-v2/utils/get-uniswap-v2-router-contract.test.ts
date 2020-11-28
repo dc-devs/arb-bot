@@ -9,9 +9,9 @@ before(() => {
 	dotenv.config();
 });
 
-describe('getUniswapV2RouterContract', async () => {
-	it.only('should return Uniswap V2 Router Contract', async () => {
-		const uniswapV2RouterContract = await getUniswapV2RouterContract();
+describe('getUniswapV2RouterContract', () => {
+	it.only('should return Uniswap V2 Router Contract', () => {
+		const uniswapV2RouterContract = getUniswapV2RouterContract();
 		const { address, swapExactTokensForTokens } = uniswapV2RouterContract;
 
 		expect(address).to.equal(uniswapV2RouterAddress);

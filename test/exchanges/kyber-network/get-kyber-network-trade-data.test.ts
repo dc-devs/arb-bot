@@ -15,6 +15,7 @@ describe('getKyberNetworkTradeData', () => {
 		const tradeData = await getKyberNetworkTradeData({
 			sourceToken: WETH,
 			destinationToken: RSR,
+			sourceTokenQuantity: '1',
 		});
 
 		const {

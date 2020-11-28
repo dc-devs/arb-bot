@@ -15,6 +15,7 @@ describe('getUniswapV2TradeData', async () => {
 		const tradeData = await getUniswapV2TradeData({
 			sourceToken: WETH,
 			destinationToken: RSR,
+			sourceTokenQuantity: '1',
 		});
 
 		const {
