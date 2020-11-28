@@ -11,7 +11,7 @@ before(() => {
 });
 
 describe('getUniswapV2TradeData', async () => {
-	it('should return correct trade data', async () => {
+	it.only('should return correct trade data', async () => {
 		const tradeData = await getUniswapV2TradeData({
 			sourceToken: WETH,
 			destinationToken: RSR,
