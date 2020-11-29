@@ -5,6 +5,7 @@ import getUniswapV2Tokens from './utils/get-uniswap-v2-tokens';
 import getUniswapV2TradeArgs from './utils/get-uniswap-v2-trade-args';
 import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
 import getUniswapV2RouterContract from './utils/get-uniswap-v2-router-contract';
+import defaultGasEstimate from './constants/uniswap-v2-default-gas-estimate-swap-extact-for-token';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ const getGasEstimateSwapExactTokensForTokens = async ({
 	try {
 		const amountIn = web3.utils.toWei(inputTokenQuantity);
 		const uniswapV2RouterContract = getUniswapV2RouterContract();
+		let gasEstimate;
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
 			inputToken,
@@ -35,14 +37,20 @@ const getGasEstimateSwapExactTokensForTokens = async ({
 			uniDestinationToken,
 		});
 
-		const gasEstimate = await uniswapV2RouterContract.estimateGas.swapExactTokensForTokens(
-			amountIn,
-			amountOutMin,
-			path,
-			to,
-			deadline,
-			providerOptions
-		);
+		try {
+			const gasEstimateBN = await uniswapV2RouterContract.estimateGas.swapExactTokensForTokens(
+				amountIn,
+				amountOutMin,
+				path,
+				to,
+				deadline,
+				providerOptions
+			);
+
+			gasEstimate = gasEstimateBN.toString();
+		} catch (e) {
+			gasEstimate = defaultGasEstimate;
+		}
 
 		return gasEstimate;
 	} catch (error) {

@@ -12,7 +12,7 @@ const start = async () => {
 		getTradePairData({
 			inputToken: WETH,
 			outputToken: RSR,
-			inputTokenQuantity: '2',
+			inputTokenQuantity: '1',
 		}),
 		getTradePairData({
 			inputToken: RSR,
@@ -31,6 +31,7 @@ const start = async () => {
 	// TODO: After Trade pairs can calculate their est gas price, use the gas fee for a fast transaction
 	// to figure out if this is going to be a profitable trade, or at least how many ETH swaps it takes to
 	// to get over the transaction fee..
+
 	// }, 1000);
 };
 

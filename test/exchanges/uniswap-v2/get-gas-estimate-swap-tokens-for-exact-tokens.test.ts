@@ -4,32 +4,75 @@ import to from 'await-to-js';
 import { web3 } from '../../../src/providers/web3';
 import tokens from '../../../src/constants/tokens';
 import getGasEstimateSwapExactTokensForTokens from '../../../src/exchanges/uniswap-v2/get-gas-estimate-swap-tokens-for-exact-tokens';
+import defaultGasEstimate from '../../../src/exchanges/uniswap-v2/constants/uniswap-v2-default-gas-estimate-swap-extact-for-token';
 
 const { expect } = chai;
-const { WETH, RSR } = tokens;
+const { UNI, WETH, RSR } = tokens;
 
 before(() => {
 	dotenv.config();
 });
 
 describe('getGasEstimateSwapExactTokensForTokens', async () => {
-	it('should return the gas estimate for trade transaction on UniSwapV2', async () => {
-		const gasPrice = web3.utils.toWei('30', 'gwei');
-		const gasLimit = 1000000;
+	describe('when account has the current token amount available', () => {
+		it('should return the gas estimate for trade transaction (WETH->RSR) on UniSwapV2', async () => {
+			const gasPrice = web3.utils.toWei('30', 'gwei');
+			const gasLimit = 1000000;
 
-		const [error, gasEstimateBN] = await to(
-			getGasEstimateSwapExactTokensForTokens({
-				inputTokenQuantity: '.01',
-				inputToken: WETH,
-				outputToken: RSR,
-				providerOptions: { gasPrice, gasLimit },
-			})
-		);
+			const [error, gasEstimate] = await to(
+				getGasEstimateSwapExactTokensForTokens({
+					inputTokenQuantity: '1',
+					inputToken: WETH,
+					outputToken: RSR,
+					providerOptions: { gasPrice, gasLimit },
+				})
+			);
 
-		const minimumGasUnits = 100000;
-		const estimateGasUnits = Number(gasEstimateBN?.toString());
+			const gasEstimateFloor = 100000;
+			const gasEstimateNumber = Number(gasEstimate);
 
-		expect(error).to.be.null;
-		expect(estimateGasUnits).to.be.above(minimumGasUnits);
+			expect(error).to.be.null;
+			expect(gasEstimateNumber).to.not.equal(gasEstimateFloor);
+			expect(gasEstimateNumber).to.be.above(gasEstimateFloor);
+		});
+
+		it('should return the gas estimate for trade transaction (RSR->WETH) on UniSwapV2', async () => {
+			const gasPrice = web3.utils.toWei('30', 'gwei');
+			const gasLimit = 1000000;
+
+			const [error, gasEstimate] = await to(
+				getGasEstimateSwapExactTokensForTokens({
+					inputTokenQuantity: '1000',
+					inputToken: RSR,
+					outputToken: WETH,
+					providerOptions: { gasPrice, gasLimit },
+				})
+			);
+
+			const gasEstimateFloor = 100000;
+			const gasEstimateNumber = Number(gasEstimate);
+
+			expect(error).to.be.null;
+			expect(gasEstimateNumber).to.not.equal(gasEstimateFloor);
+			expect(gasEstimateNumber).to.be.above(gasEstimateFloor);
+		});
+	});
+	describe('when account does not have the current token amount available', () => {
+		it('should return the default gas estimate for trade transaction (UNI->WETH) on UniSwapV2', async () => {
+			const gasPrice = web3.utils.toWei('30', 'gwei');
+			const gasLimit = 1000000;
+
+			const [error, gasEstimate] = await to(
+				getGasEstimateSwapExactTokensForTokens({
+					inputTokenQuantity: '1000',
+					inputToken: UNI,
+					outputToken: WETH,
+					providerOptions: { gasPrice, gasLimit },
+				})
+			);
+
+			expect(error).to.be.null;
+			expect(gasEstimate).to.equal(defaultGasEstimate);
+		});
 	});
 });

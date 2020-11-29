@@ -43,14 +43,12 @@ const getUniswapV2TradeData = async ({
 		const gasLimit = 1000000;
 		const gasPrice = web3.utils.toWei('30', 'gwei');
 
-		const gasEstimateBN = await getGasEstimateSwapExactTokensForTokens({
+		const gasEstimate = await getGasEstimateSwapExactTokensForTokens({
 			inputTokenQuantity,
 			inputToken,
 			outputToken,
 			providerOptions: { gasPrice, gasLimit },
 		});
-
-		const gasEstimate = gasEstimateBN.toString();
 
 		return {
 			exchange: 'Uniswap v2',

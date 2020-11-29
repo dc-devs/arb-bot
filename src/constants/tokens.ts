@@ -35,6 +35,12 @@ const tokens = {
 		decimals: 8,
 		address: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
 	},
+	UNI: {
+		symbol: 'UNI',
+		name: 'Uniswap',
+		decimals: 18,
+		address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
+	},
 } as Tokens;
 
 export default tokens;
