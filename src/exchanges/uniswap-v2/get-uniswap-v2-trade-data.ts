@@ -6,6 +6,7 @@ import getUniswapV2Trade from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-t
 import getUniswapV2Tokens from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-tokens';
 import uniswapV2LiquidityProviderFee from './constants/uniswap-v2-liquidity-provider-fee';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
+// import getGasEstimateSwapExactTokensForTokens from './get-gas-estimate-swap-tokens-for-exact-tokens';
 
 dotenv.config();
 

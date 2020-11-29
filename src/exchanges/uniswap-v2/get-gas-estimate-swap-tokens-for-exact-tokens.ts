@@ -8,7 +8,7 @@ import getUniswapV2RouterContract from './utils/get-uniswap-v2-router-contract';
 
 dotenv.config();
 
-const swapExactTokensForTokens = async ({
+const getGasEstimateSwapExactTokensForTokens = async ({
 	inputToken,
 	outputToken,
 	inputTokenQuantity,
@@ -50,4 +50,4 @@ const swapExactTokensForTokens = async ({
 	}
 };
 
-export default swapExactTokensForTokens;
+export default getGasEstimateSwapExactTokensForTokens;
