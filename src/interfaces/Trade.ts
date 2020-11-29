@@ -22,8 +22,9 @@ export interface Trade {
 	exchange: string;
 	inputToken: Token;
 	outputToken: Token;
+	gasEstimate: string;
 	inputTokenQuantity: string;
-	platformFees?: string;
+	platformFees: string;
 	outputTokenQuantity: string;
 	expectedRates: ExpectedRatesObj;
 }

@@ -53,6 +53,8 @@ const getKyberNetworkTradeData = async ({
 					worstRate: formattedWorstRate,
 				},
 			},
+			platformFees: '0',
+			gasEstimate: '0',
 		};
 	} catch (error) {
 		throw new Error(error);

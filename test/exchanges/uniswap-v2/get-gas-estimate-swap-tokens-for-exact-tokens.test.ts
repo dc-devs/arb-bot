@@ -15,9 +15,9 @@ before(() => {
 describe('getGasEstimateSwapExactTokensForTokens', async () => {
 	it('should return the gas estimate for trade transaction on UniSwapV2', async () => {
 		const gasPrice = web3.utils.toWei('30', 'gwei');
-		const gasLimit = 1000000; // Taken From Metamask
+		const gasLimit = 1000000;
 
-		const [error, estimatedGasUnits] = await to(
+		const [error, gasEstimateBN] = await to(
 			getGasEstimateSwapExactTokensForTokens({
 				inputTokenQuantity: '.01',
 				inputToken: WETH,
@@ -26,8 +26,8 @@ describe('getGasEstimateSwapExactTokensForTokens', async () => {
 			})
 		);
 
-		const estimateGasUnits = Number(estimatedGasUnits?.toString());
 		const minimumGasUnits = 100000;
+		const estimateGasUnits = Number(gasEstimateBN?.toString());
 
 		expect(error).to.be.null;
 		expect(estimateGasUnits).to.be.above(minimumGasUnits);

@@ -35,7 +35,7 @@ const getGasEstimateSwapExactTokensForTokens = async ({
 			uniDestinationToken,
 		});
 
-		const estimatedGasUnits = await uniswapV2RouterContract.estimateGas.swapExactTokensForTokens(
+		const gasEstimate = await uniswapV2RouterContract.estimateGas.swapExactTokensForTokens(
 			amountIn,
 			amountOutMin,
 			path,
@@ -44,7 +44,7 @@ const getGasEstimateSwapExactTokensForTokens = async ({
 			providerOptions
 		);
 
-		return estimatedGasUnits;
+		return gasEstimate;
 	} catch (error) {
 		throw new Error(error);
 	}

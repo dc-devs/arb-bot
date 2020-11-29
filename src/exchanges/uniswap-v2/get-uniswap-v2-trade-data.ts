@@ -6,7 +6,7 @@ import getUniswapV2Trade from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-t
 import getUniswapV2Tokens from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-tokens';
 import uniswapV2LiquidityProviderFee from './constants/uniswap-v2-liquidity-provider-fee';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
-// import getGasEstimateSwapExactTokensForTokens from './get-gas-estimate-swap-tokens-for-exact-tokens';
+import getGasEstimateSwapExactTokensForTokens from './get-gas-estimate-swap-tokens-for-exact-tokens';
 
 dotenv.config();
 
@@ -40,8 +40,21 @@ const getUniswapV2TradeData = async ({
 			Number(inputTokenQuantity) * uniswapV2LiquidityProviderFee
 		).toString();
 
+		const gasLimit = 1000000;
+		const gasPrice = web3.utils.toWei('30', 'gwei');
+
+		const gasEstimateBN = await getGasEstimateSwapExactTokensForTokens({
+			inputTokenQuantity,
+			inputToken,
+			outputToken,
+			providerOptions: { gasPrice, gasLimit },
+		});
+
+		const gasEstimate = gasEstimateBN.toString();
+
 		return {
 			exchange: 'Uniswap v2',
+			gasEstimate,
 			platformFees: liquidityProviderFee,
 			inputTokenQuantity,
 			inputToken: inputToken,
