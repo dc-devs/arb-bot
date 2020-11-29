@@ -6,7 +6,7 @@ import getKyberNetworkTradeData from '../../exchanges/kyber-network/get-kyber-ne
 interface GetBestTradesArgs {
 	sourceToken: Token;
 	destinationToken: Token;
-	sourceTokenQuantity?: string;
+	sourceTokenQuantity: string;
 }
 
 const getBestTrades = async ({

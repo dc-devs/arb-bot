@@ -4,7 +4,7 @@ import getTrades from './get-best-trades';
 interface GetBestTradeArgs {
 	sourceToken: Token;
 	destinationToken: Token;
-	sourceTokenQuantity?: string;
+	sourceTokenQuantity: string;
 }
 
 const getBestTrade = async ({
