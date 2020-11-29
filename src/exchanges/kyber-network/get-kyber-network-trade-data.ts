@@ -33,12 +33,21 @@ const getKyberNetworkTradeData = async ({
 			expectedRate: readableExpectedRate.toString(),
 		});
 		// TODO: USE WEB3 To Calc Gas Price..
+		const platformFeesWei = web3.utils.toWei('0');
+		const platformFeesEth = web3.utils.toWei('0', 'ether');
+		const platformFeesBN = web3.utils.toBN(platformFeesWei);
+
 		return {
 			exchange: 'Kyber Network',
 			inputTokenQuantity,
 			inputToken,
 			outputToken,
 			outputTokenQuantity,
+			platformFees: {
+				wei: platformFeesWei,
+				eth: platformFeesEth,
+				BN: platformFeesBN,
+			},
 			expectedRates: {
 				number: {
 					expectedRate: readableExpectedRate,
@@ -53,7 +62,6 @@ const getKyberNetworkTradeData = async ({
 					worstRate: formattedWorstRate,
 				},
 			},
-			platformFees: '0',
 			gasEstimate: '0',
 		};
 	} catch (error) {

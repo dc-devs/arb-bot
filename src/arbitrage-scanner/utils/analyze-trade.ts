@@ -9,7 +9,7 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 	const outgoingTradeData = {
 		exchange: outgoingTrade.exchange,
 		platformFees: outgoingTrade.platformFees,
-		expectedRate: outgoingTrade.expectedRates.string.expectedRate,
+		expectedRate: outgoingTrade.expectedRates.string,
 		gasEstimate: outgoingTrade.gasEstimate,
 		inputToken: outgoingTrade.inputToken.symbol,
 		inputTokenQuantity: outgoingTrade.inputTokenQuantity,
@@ -20,7 +20,7 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 	const incomingTradeData = {
 		exchange: incomingTrade.exchange,
 		platformFees: incomingTrade.platformFees,
-		expectedRate: incomingTrade.expectedRates.string.expectedRate,
+		expectedRate: incomingTrade.expectedRates.string,
 		gasEstimate: incomingTrade.gasEstimate,
 		inputToken: incomingTrade.inputToken.symbol,
 		inputTokenQuantity: incomingTrade.inputTokenQuantity,

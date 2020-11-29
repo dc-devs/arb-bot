@@ -1,3 +1,4 @@
+import BN from 'bn.js';
 import Token from './Token';
 
 export interface Number {
@@ -12,10 +13,34 @@ export interface Formatted {
 	[key: string]: string;
 }
 
+export interface NumObj {
+	expectedRate: number;
+	nextMidPrice?: number;
+	worstRate?: number;
+}
+
+export interface StringObj {
+	expectedRate: string;
+	nextMidPrice?: string;
+	worstRate?: string;
+}
+
+export interface FormattedObj {
+	expectedRate: string;
+	nextMidPrice?: string;
+	worstRate?: string;
+}
+
 export interface ExpectedRatesObj {
-	number: Number;
-	string: String;
-	formatted: Formatted;
+	number: NumObj;
+	string: StringObj;
+	formatted: FormattedObj;
+}
+
+export interface PlatformFees {
+	wei: string;
+	eth: string;
+	BN: BN;
 }
 
 export interface Trade {
@@ -24,7 +49,7 @@ export interface Trade {
 	outputToken: Token;
 	gasEstimate: string;
 	inputTokenQuantity: string;
-	platformFees: string;
+	platformFees: PlatformFees;
 	outputTokenQuantity: string;
 	expectedRates: ExpectedRatesObj;
 }
