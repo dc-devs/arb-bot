@@ -1,9 +1,9 @@
 import TokenInterface from '../Token';
 
 interface GetTradeDataArgs {
-	sourceToken: TokenInterface;
-	destinationToken: TokenInterface;
-	sourceTokenQuantity: string;
+	inputToken: TokenInterface;
+	outputToken: TokenInterface;
+	inputTokenQuantity: string;
 	providerOptions?: object;
 }
 

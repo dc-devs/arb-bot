@@ -1,32 +1,32 @@
 import { Token, ChainId } from '@uniswap/sdk';
 import { Token as NativeToken } from '../../../interfaces/Token';
 
-interface GetUniswapTokensArgs {
-	sourceToken: NativeToken;
-	destinationToken: NativeToken;
+interface GetUnioutputTokensArgs {
+	inputToken: NativeToken;
+	outputToken: NativeToken;
 }
 
-const getUniswapTokens = ({
-	sourceToken,
-	destinationToken,
-}: GetUniswapTokensArgs) => {
+const getUnioutputTokens = ({
+	inputToken,
+	outputToken,
+}: GetUnioutputTokensArgs) => {
 	const uniSourceToken = new Token(
 		ChainId.MAINNET,
-		sourceToken.address,
-		sourceToken.decimals,
-		sourceToken.symbol,
-		sourceToken.name
+		inputToken.address,
+		inputToken.decimals,
+		inputToken.symbol,
+		inputToken.name
 	);
 
 	const uniDestinationToken = new Token(
 		ChainId.MAINNET,
-		destinationToken.address,
-		destinationToken.decimals,
-		destinationToken.symbol,
-		destinationToken.name
+		outputToken.address,
+		outputToken.decimals,
+		outputToken.symbol,
+		outputToken.name
 	);
 
 	return { uniSourceToken, uniDestinationToken };
 };
 
-export default getUniswapTokens;
+export default getUnioutputTokens;

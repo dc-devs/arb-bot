@@ -9,28 +9,26 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 	const outgoingTradeData = {
 		exchange: outgoingTrade.exchange,
 		platformFees: outgoingTrade.platformFees,
-		sourceToken: outgoingTrade.sourceToken.symbol,
-		sourceTokenQuantity: outgoingTrade.sourceTokenQuantity,
-		destinationToken: outgoingTrade.destinationToken.symbol,
 		expectedRate: outgoingTrade.expectedRates.string.expectedRate,
-		expectedDestinationTokenQuantity:
-			outgoingTrade.expectedDestinationTokenQuantity,
+		inputToken: outgoingTrade.inputToken.symbol,
+		inputTokenQuantity: outgoingTrade.inputTokenQuantity,
+		outputToken: outgoingTrade.outputToken.symbol,
+		outputTokenQuantity: outgoingTrade.outputTokenQuantity,
 	};
 
 	const incomingTradeData = {
 		exchange: incomingTrade.exchange,
 		platformFees: incomingTrade.platformFees,
-		sourceToken: incomingTrade.sourceToken.symbol,
-		sourceTokenQuantity: incomingTrade.sourceTokenQuantity,
-		destinationToken: incomingTrade.destinationToken.symbol,
 		expectedRate: incomingTrade.expectedRates.string.expectedRate,
-		expectedDestinationTokenQuantity:
-			incomingTrade.expectedDestinationTokenQuantity,
+		inputToken: incomingTrade.inputToken.symbol,
+		inputTokenQuantity: incomingTrade.inputTokenQuantity,
+		outputToken: incomingTrade.outputToken.symbol,
+		outputTokenQuantity: incomingTrade.outputTokenQuantity,
 	};
 
 	const expectedTradeGain =
-		Number(incomingTradeData.expectedDestinationTokenQuantity) -
-		Number(outgoingTradeData.sourceTokenQuantity);
+		Number(incomingTradeData.outputTokenQuantity) -
+		Number(outgoingTradeData.inputTokenQuantity);
 
 	return {
 		outgoingTrade: outgoingTradeData,

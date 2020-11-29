@@ -9,18 +9,18 @@ import getUniswapV2RouterContract from './utils/get-uniswap-v2-router-contract';
 dotenv.config();
 
 const swapExactTokensForTokens = async ({
-	sourceToken,
-	destinationToken,
-	sourceTokenQuantity,
+	inputToken,
+	outputToken,
+	inputTokenQuantity,
 	providerOptions,
 }: GetTradeDataArgs) => {
 	try {
-		const amountIn = web3.utils.toWei(sourceTokenQuantity);
+		const amountIn = web3.utils.toWei(inputTokenQuantity);
 		const uniswapV2RouterContract = getUniswapV2RouterContract();
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			sourceToken,
-			destinationToken,
+			inputToken,
+			outputToken,
 		});
 
 		const uniTrade = await getUniswapV2Trade({

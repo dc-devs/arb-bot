@@ -13,27 +13,27 @@ before(() => {
 describe('getUniswapV2TradeData', async () => {
 	it('should return correct trade data', async () => {
 		const tradeData = await getUniswapV2TradeData({
-			sourceToken: WETH,
-			destinationToken: RSR,
-			sourceTokenQuantity: '1',
+			inputToken: WETH,
+			outputToken: RSR,
+			inputTokenQuantity: '1',
 		});
 
 		const {
 			exchange,
 			expectedRates,
-			sourceTokenQuantity,
-			expectedDestinationTokenQuantity,
+			inputTokenQuantity,
+			outputTokenQuantity,
 		} = tradeData;
 
 		expect(exchange).to.equal('Uniswap v2');
 		expect(typeof expectedRates.number.expectedRate).to.equal('number');
 		expect(typeof expectedRates.number.nextMidPrice).to.equal('number');
-		expect(typeof sourceTokenQuantity).to.equal('string');
+		expect(typeof inputTokenQuantity).to.equal('string');
 		expect(typeof expectedRates.string.expectedRate).to.equal('string');
 		expect(typeof expectedRates.string.nextMidPrice).to.equal('string');
 		expect(typeof expectedRates.formatted.expectedRate).to.equal('string');
 		expect(typeof expectedRates.formatted.nextMidPrice).to.equal('string');
 		expect(typeof expectedRates.formatted.nextMidPrice).to.equal('string');
-		expect(typeof expectedDestinationTokenQuantity).to.equal('string');
+		expect(typeof outputTokenQuantity).to.equal('string');
 	});
 });

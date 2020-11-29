@@ -372,7 +372,7 @@ const uniswapV2RouterAbi = [
 			{ internalType: 'address', name: 'to', type: 'address' },
 			{ internalType: 'uint256', name: 'deadline', type: 'uint256' },
 		],
-		name: 'swapTokensForExactETH',
+		name: 'outputTokensForExactETH',
 		outputs: [
 			{ internalType: 'uint256[]', name: 'amounts', type: 'uint256[]' },
 		],
@@ -387,7 +387,7 @@ const uniswapV2RouterAbi = [
 			{ internalType: 'address', name: 'to', type: 'address' },
 			{ internalType: 'uint256', name: 'deadline', type: 'uint256' },
 		],
-		name: 'swapTokensForExactTokens',
+		name: 'outputTokensForExactTokens',
 		outputs: [
 			{ internalType: 'uint256[]', name: 'amounts', type: 'uint256[]' },
 		],

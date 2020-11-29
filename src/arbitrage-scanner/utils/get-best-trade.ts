@@ -1,21 +1,21 @@
 import Token from '../../interfaces/Token';
-import getTrades from './get-best-trades';
+import getBestTrades from './get-best-trades';
 
 interface GetBestTradeArgs {
-	sourceToken: Token;
-	destinationToken: Token;
-	sourceTokenQuantity: string;
+	inputToken: Token;
+	outputToken: Token;
+	inputTokenQuantity: string;
 }
 
 const getBestTrade = async ({
-	sourceToken,
-	destinationToken,
-	sourceTokenQuantity,
+	inputToken,
+	outputToken,
+	inputTokenQuantity,
 }: GetBestTradeArgs) => {
-	const trades = await getTrades({
-		sourceToken,
-		destinationToken,
-		sourceTokenQuantity,
+	const trades = await getBestTrades({
+		inputToken,
+		outputToken,
+		inputTokenQuantity,
 	});
 
 	return trades[0];

@@ -10,14 +10,14 @@ const start = async () => {
 	// setInterval(async () => {
 	const tradePairDataResults = await Promise.all([
 		getTradePairData({
-			baseToken: WETH,
-			swapToken: RSR,
-			sourceTokenQuantity: '2',
+			inputToken: WETH,
+			outputToken: RSR,
+			inputTokenQuantity: '2',
 		}),
 		getTradePairData({
-			baseToken: RSR,
-			swapToken: WETH,
-			sourceTokenQuantity: '1000',
+			inputToken: RSR,
+			outputToken: WETH,
+			inputTokenQuantity: '1000',
 		}),
 	]);
 

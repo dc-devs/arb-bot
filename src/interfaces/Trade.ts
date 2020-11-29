@@ -20,11 +20,11 @@ export interface ExpectedRatesObj {
 
 export interface Trade {
 	exchange: string;
-	sourceToken: Token;
-	destinationToken: Token;
-	sourceTokenQuantity: string;
+	inputToken: Token;
+	outputToken: Token;
+	inputTokenQuantity: string;
 	platformFees?: string;
-	expectedDestinationTokenQuantity: string;
+	outputTokenQuantity: string;
 	expectedRates: ExpectedRatesObj;
 }
 

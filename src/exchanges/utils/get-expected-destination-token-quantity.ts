@@ -1,12 +1,12 @@
 interface GetExpectedDestinationTokenQuantityArgs {
 	expectedRate: string;
-	sourceTokenQuantity: string;
+	inputTokenQuantity: string;
 }
 const getExpectedDestinationTokenQuantity = ({
 	expectedRate,
-	sourceTokenQuantity,
+	inputTokenQuantity,
 }: GetExpectedDestinationTokenQuantityArgs) => {
-	const quantity = Number(expectedRate) * Number(sourceTokenQuantity);
+	const quantity = Number(expectedRate) * Number(inputTokenQuantity);
 	return quantity.toString();
 };
 

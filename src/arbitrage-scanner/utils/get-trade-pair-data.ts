@@ -3,26 +3,26 @@ import analyzeTrade from './analyze-trade';
 import getBestTrade from './get-best-trade';
 
 interface GetTradePairDataArgs {
-	baseToken: Token;
-	swapToken: Token;
-	sourceTokenQuantity: string;
+	inputToken: Token;
+	outputToken: Token;
+	inputTokenQuantity: string;
 }
 
 const getTradePairData = async ({
-	baseToken,
-	swapToken,
-	sourceTokenQuantity,
+	inputToken,
+	outputToken,
+	inputTokenQuantity,
 }: GetTradePairDataArgs) => {
 	const bestOutgoingTrade = await getBestTrade({
-		sourceToken: baseToken,
-		destinationToken: swapToken,
-		sourceTokenQuantity,
+		inputToken,
+		outputToken,
+		inputTokenQuantity,
 	});
 
 	const bestIncomingTrade = await getBestTrade({
-		sourceToken: swapToken,
-		destinationToken: baseToken,
-		sourceTokenQuantity: bestOutgoingTrade.expectedDestinationTokenQuantity,
+		inputToken: outputToken,
+		outputToken: inputToken,
+		inputTokenQuantity: bestOutgoingTrade.outputTokenQuantity,
 	});
 
 	return analyzeTrade({

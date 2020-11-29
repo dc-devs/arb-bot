@@ -13,26 +13,26 @@ before(() => {
 describe('getKyberNetworkTradeData', () => {
 	it('should return correct trade data', async () => {
 		const tradeData = await getKyberNetworkTradeData({
-			sourceToken: WETH,
-			destinationToken: RSR,
-			sourceTokenQuantity: '1',
+			inputToken: WETH,
+			outputToken: RSR,
+			inputTokenQuantity: '1',
 		});
 
 		const {
 			exchange,
 			expectedRates,
-			sourceTokenQuantity,
-			expectedDestinationTokenQuantity,
+			inputTokenQuantity,
+			outputTokenQuantity,
 		} = tradeData;
 
 		expect(exchange).to.equal('Kyber Network');
 		expect(typeof expectedRates.number.worstRate).to.equal('number');
 		expect(typeof expectedRates.number.expectedRate).to.equal('number');
-		expect(typeof sourceTokenQuantity).to.equal('string');
+		expect(typeof inputTokenQuantity).to.equal('string');
 		expect(typeof expectedRates.string.expectedRate).to.equal('string');
 		expect(typeof expectedRates.string.worstRate).to.equal('string');
 		expect(typeof expectedRates.formatted.expectedRate).to.equal('string');
 		expect(typeof expectedRates.formatted.worstRate).to.equal('string');
-		expect(typeof expectedDestinationTokenQuantity).to.equal('string');
+		expect(typeof outputTokenQuantity).to.equal('string');
 	});
 });

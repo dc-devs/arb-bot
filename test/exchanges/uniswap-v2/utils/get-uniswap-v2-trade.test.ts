@@ -15,14 +15,14 @@ before(() => {
 
 describe('getUniswapV2Trade', () => {
 	it('should return a UniswapV2 trade', async () => {
-		const sourceToken = WETH;
-		const destinationToken = RSR;
-		const sourceTokenQuantity = '1';
-		const amountIn = web3.utils.toWei(sourceTokenQuantity);
+		const inputToken = WETH;
+		const outputToken = RSR;
+		const inputTokenQuantity = '1';
+		const amountIn = web3.utils.toWei(inputTokenQuantity);
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			sourceToken,
-			destinationToken,
+			inputToken,
+			outputToken,
 		});
 
 		const uniTrade = await getUniswapV2Trade({
@@ -31,8 +31,8 @@ describe('getUniswapV2Trade', () => {
 			uniDestinationToken,
 		});
 
-		expect(uniTrade.route.input.symbol).to.equal(sourceToken.symbol);
-		expect(uniTrade.route.output.symbol).to.equal(destinationToken.symbol);
+		expect(uniTrade.route.input.symbol).to.equal(inputToken.symbol);
+		expect(uniTrade.route.output.symbol).to.equal(outputToken.symbol);
 		expect(uniTrade.inputAmount.numerator.toString()).to.equal(amountIn);
 		expect(uniTrade.executionPrice instanceof Price).to.equal(true);
 		expect(uniTrade.nextMidPrice instanceof Price).to.equal(true);

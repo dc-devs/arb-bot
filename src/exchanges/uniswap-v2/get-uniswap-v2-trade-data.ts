@@ -10,16 +10,16 @@ import getExpectedDestinationTokenQuantity from '../utils/get-expected-destinati
 dotenv.config();
 
 const getUniswapV2TradeData = async ({
-	sourceToken,
-	destinationToken,
-	sourceTokenQuantity = '1',
+	inputToken,
+	outputToken,
+	inputTokenQuantity = '1',
 }: GetTradeDataArgs) => {
 	try {
-		const amountIn = web3.utils.toWei(sourceTokenQuantity);
+		const amountIn = web3.utils.toWei(inputTokenQuantity);
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			sourceToken,
-			destinationToken,
+			inputToken,
+			outputToken,
 		});
 
 		const uniTrade = await getUniswapV2Trade({
@@ -30,24 +30,22 @@ const getUniswapV2TradeData = async ({
 
 		const expectedRates = buildExpectedRates({ uniTrade });
 
-		const expectedDestinationTokenQuantity = getExpectedDestinationTokenQuantity(
-			{
-				sourceTokenQuantity,
-				expectedRate: expectedRates.string.expectedRate,
-			}
-		);
+		const outputTokenQuantity = getExpectedDestinationTokenQuantity({
+			inputTokenQuantity,
+			expectedRate: expectedRates.string.expectedRate,
+		});
 
 		const liquidityProviderFee = (
-			Number(sourceTokenQuantity) * uniswapV2LiquidityProviderFee
+			Number(inputTokenQuantity) * uniswapV2LiquidityProviderFee
 		).toString();
 
 		return {
 			exchange: 'Uniswap v2',
 			platformFees: liquidityProviderFee,
-			sourceTokenQuantity,
-			sourceToken: sourceToken,
-			destinationToken: destinationToken,
-			expectedDestinationTokenQuantity,
+			inputTokenQuantity,
+			inputToken: inputToken,
+			outputToken: outputToken,
+			outputTokenQuantity,
 			expectedRates,
 		};
 	} catch (error) {

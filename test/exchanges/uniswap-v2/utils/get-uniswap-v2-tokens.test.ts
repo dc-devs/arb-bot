@@ -12,15 +12,15 @@ before(() => {
 
 describe('getUniswapV2Tokens', () => {
 	it('should return UniswapV2 tokens', () => {
-		const sourceToken = WETH;
-		const destinationToken = RSR;
+		const inputToken = WETH;
+		const outputToken = RSR;
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			sourceToken,
-			destinationToken,
+			inputToken,
+			outputToken,
 		});
 
-		expect(uniSourceToken.address).to.equal(sourceToken.address);
-		expect(uniDestinationToken.address).to.equal(destinationToken.address);
+		expect(uniSourceToken.address).to.equal(inputToken.address);
+		expect(uniDestinationToken.address).to.equal(outputToken.address);
 	});
 });

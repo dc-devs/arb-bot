@@ -4,26 +4,26 @@ import getUniswapV2TradeData from '../../exchanges/uniswap-v2/get-uniswap-v2-tra
 import getKyberNetworkTradeData from '../../exchanges/kyber-network/get-kyber-network-trade-data';
 
 interface GetBestTradesArgs {
-	sourceToken: Token;
-	destinationToken: Token;
-	sourceTokenQuantity: string;
+	inputToken: Token;
+	outputToken: Token;
+	inputTokenQuantity: string;
 }
 
 const getBestTrades = async ({
-	sourceToken,
-	destinationToken,
-	sourceTokenQuantity,
+	inputToken,
+	outputToken,
+	inputTokenQuantity,
 }: GetBestTradesArgs) => {
 	const trades = await Promise.all([
 		getUniswapV2TradeData({
-			sourceToken,
-			destinationToken,
-			sourceTokenQuantity,
+			inputToken,
+			outputToken,
+			inputTokenQuantity,
 		}),
 		getKyberNetworkTradeData({
-			sourceToken,
-			destinationToken,
-			sourceTokenQuantity,
+			inputToken,
+			outputToken,
+			inputTokenQuantity,
 		}),
 	]);
 

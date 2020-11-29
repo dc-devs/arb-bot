@@ -19,9 +19,9 @@ describe('estimateSwapTokensForExactTokens', async () => {
 
 		const [error, estimatedGasUnits] = await to(
 			estimateSwapTokensForExactTokens({
-				sourceTokenQuantity: '.01',
-				sourceToken: WETH,
-				destinationToken: RSR,
+				inputTokenQuantity: '.01',
+				inputToken: WETH,
+				outputToken: RSR,
 				providerOptions: { gasPrice, gasLimit },
 			})
 		);

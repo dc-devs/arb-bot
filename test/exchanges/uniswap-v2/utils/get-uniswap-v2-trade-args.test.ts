@@ -15,14 +15,14 @@ before(() => {
 
 describe('getUniswapV2TradeArgs', () => {
 	it('should return a UniswapV2 trade args', async () => {
-		const sourceToken = WETH;
-		const destinationToken = RSR;
-		const sourceTokenQuantity = '1';
-		const amountIn = web3.utils.toWei(sourceTokenQuantity);
+		const inputToken = WETH;
+		const outputToken = RSR;
+		const inputTokenQuantity = '1';
+		const amountIn = web3.utils.toWei(inputTokenQuantity);
 
 		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			sourceToken,
-			destinationToken,
+			inputToken,
+			outputToken,
 		});
 
 		const uniTrade = await getUniswapV2Trade({
