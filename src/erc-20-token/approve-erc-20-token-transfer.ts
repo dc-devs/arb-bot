@@ -29,7 +29,7 @@ const approveErc20TokenTransfer = async ({
 
 		return tokenApprovalTransaction;
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(`Method::approveErc20TokenTransfer: ${error}`);
 	}
 };
 

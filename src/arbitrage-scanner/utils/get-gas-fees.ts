@@ -30,7 +30,7 @@ const getGasFees = async () => {
 
 		return gasFees;
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(`Method::getGasFees: ${error}`);
 	}
 };
 

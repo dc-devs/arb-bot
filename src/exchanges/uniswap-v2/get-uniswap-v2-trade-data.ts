@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
 import { web3 } from '../../providers/web3';
 import getUniswapV2Trade from './utils/get-uniswap-v2-trade';
-import buildExpectedRates from './utils/build-expected-rates';
+import buildExpectedRates from './utils/build-uniswap-v2-expected-rates';
 import getUniswapV2Tokens from './utils/get-uniswap-v2-tokens';
 import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
-import getLiquidityProviderFee from './utils/get-liquidity-provider-fee';
+import getLiquidityProviderFee from './utils/get-uniswap-v2-liquidity-provider-fee';
 import uniswapV2LiquidityProviderFee from './constants/uniswap-v2-liquidity-provider-fee';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
 import getGasEstimateSwapExactTokensForTokens from './get-gas-estimate-swap-tokens-for-exact-tokens';
@@ -73,7 +73,7 @@ const getUniswapV2TradeData = async ({
 			expectedRates,
 		};
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(`Method::getUniswapV2TradeData: ${error}`);
 	}
 };
 

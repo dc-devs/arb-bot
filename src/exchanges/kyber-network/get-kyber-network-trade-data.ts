@@ -65,7 +65,7 @@ const getKyberNetworkTradeData = async ({
 			gasEstimate: '0',
 		};
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(`Method::getKyberNetworkTradeData: ${error}`);
 	}
 };
 

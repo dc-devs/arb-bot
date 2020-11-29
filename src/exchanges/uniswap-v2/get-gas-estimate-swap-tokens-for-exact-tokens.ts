@@ -54,7 +54,9 @@ const getGasEstimateSwapExactTokensForTokens = async ({
 
 		return gasEstimate;
 	} catch (error) {
-		throw new Error(error);
+		throw new Error(
+			`Method::getGasEstimateSwapExactTokensForTokens: ${error}`
+		);
 	}
 };
 
