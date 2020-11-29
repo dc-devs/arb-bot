@@ -40,11 +40,11 @@ const getKyberNetworkTradeData = async ({
 			destinationToken,
 			expectedDestinationTokenQuantity,
 			expectedRates: {
-				raw: {
+				number: {
 					expectedRate: readableExpectedRate,
 					worstRate: readableWorstRate,
 				},
-				rawString: {
+				string: {
 					expectedRate: readableExpectedRate.toString(),
 					worstRate: readableWorstRate.toString(),
 				},

@@ -12,7 +12,7 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 		sourceToken: outgoingTrade.sourceToken.symbol,
 		sourceTokenQuantity: outgoingTrade.sourceTokenQuantity,
 		destinationToken: outgoingTrade.destinationToken.symbol,
-		expectedRate: outgoingTrade.expectedRates.rawString.expectedRate,
+		expectedRate: outgoingTrade.expectedRates.string.expectedRate,
 		expectedDestinationTokenQuantity:
 			outgoingTrade.expectedDestinationTokenQuantity,
 	};
@@ -23,14 +23,14 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 		sourceToken: incomingTrade.sourceToken.symbol,
 		sourceTokenQuantity: incomingTrade.sourceTokenQuantity,
 		destinationToken: incomingTrade.destinationToken.symbol,
-		expectedRate: incomingTrade.expectedRates.rawString.expectedRate,
+		expectedRate: incomingTrade.expectedRates.string.expectedRate,
 		expectedDestinationTokenQuantity:
 			incomingTrade.expectedDestinationTokenQuantity,
 	};
 
 	const expectedTradeGain =
-		parseFloat(incomingTradeData.expectedDestinationTokenQuantity) -
-		parseFloat(outgoingTradeData.sourceTokenQuantity);
+		Number(incomingTradeData.expectedDestinationTokenQuantity) -
+		Number(outgoingTradeData.sourceTokenQuantity);
 
 	return {
 		outgoingTrade: outgoingTradeData,

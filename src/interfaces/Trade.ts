@@ -1,10 +1,10 @@
 import Token from './Token';
 
-export interface Raw {
+export interface Number {
 	[key: string]: number;
 }
 
-export interface RawString {
+export interface String {
 	[key: string]: string;
 }
 
@@ -13,8 +13,8 @@ export interface Formatted {
 }
 
 export interface ExpectedRatesObj {
-	raw: Raw;
-	rawString: RawString;
+	number: Number;
+	string: String;
 	formatted: Formatted;
 }
 

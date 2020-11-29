@@ -6,7 +6,7 @@ const getExpectedDestinationTokenQuantity = ({
 	expectedRate,
 	sourceTokenQuantity,
 }: GetExpectedDestinationTokenQuantityArgs) => {
-	const quantity = parseFloat(expectedRate) * parseFloat(sourceTokenQuantity);
+	const quantity = Number(expectedRate) * Number(sourceTokenQuantity);
 	return quantity.toString();
 };
 

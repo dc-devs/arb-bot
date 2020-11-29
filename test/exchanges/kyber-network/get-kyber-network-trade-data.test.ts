@@ -26,11 +26,11 @@ describe('getKyberNetworkTradeData', () => {
 		} = tradeData;
 
 		expect(exchange).to.equal('Kyber Network');
-		expect(typeof expectedRates.raw.worstRate).to.equal('number');
-		expect(typeof expectedRates.raw.expectedRate).to.equal('number');
+		expect(typeof expectedRates.number.worstRate).to.equal('number');
+		expect(typeof expectedRates.number.expectedRate).to.equal('number');
 		expect(typeof sourceTokenQuantity).to.equal('string');
-		expect(typeof expectedRates.rawString.expectedRate).to.equal('string');
-		expect(typeof expectedRates.rawString.worstRate).to.equal('string');
+		expect(typeof expectedRates.string.expectedRate).to.equal('string');
+		expect(typeof expectedRates.string.worstRate).to.equal('string');
 		expect(typeof expectedRates.formatted.expectedRate).to.equal('string');
 		expect(typeof expectedRates.formatted.worstRate).to.equal('string');
 		expect(typeof expectedDestinationTokenQuantity).to.equal('string');

@@ -14,7 +14,7 @@ before(() => {
 });
 
 describe('getUniswapV2TradeArgs', () => {
-	it.only('should return a UniswapV2 trade args', async () => {
+	it('should return a UniswapV2 trade args', async () => {
 		const sourceToken = WETH;
 		const destinationToken = RSR;
 		const sourceTokenQuantity = '1';

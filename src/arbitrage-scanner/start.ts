@@ -12,7 +12,7 @@ const start = async () => {
 		getTradePairData({
 			baseToken: WETH,
 			swapToken: RSR,
-			sourceTokenQuantity: '1',
+			sourceTokenQuantity: '2',
 		}),
 		getTradePairData({
 			baseToken: RSR,

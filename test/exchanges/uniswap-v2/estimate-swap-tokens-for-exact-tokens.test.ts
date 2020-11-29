@@ -13,7 +13,7 @@ before(() => {
 });
 
 describe('estimateSwapTokensForExactTokens', async () => {
-	it.only('should return the gas estimate for trade transaction on UniSwapV2', async () => {
+	it('should return the gas estimate for trade transaction on UniSwapV2', async () => {
 		const gasPrice = web3.utils.toWei('30', 'gwei');
 		const gasLimit = 1000000; // Taken From Metamask
 

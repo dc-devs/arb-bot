@@ -1,23 +1,13 @@
 import dotenv from 'dotenv';
 import { web3 } from '../../providers/web3';
-import tokens from '../../constants/tokens';
-import { infura } from '../../providers/infura';
-import formatPrice from '../utils/format-price';
+import buildExpectedRates from './utils/build-expected-rates';
 import GetTradeDataArgs from '../../interfaces/args/get-trade-data-args';
+import getUniswapV2Trade from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-trade';
+import getUniswapV2Tokens from '../../exchanges/uniswap-v2/utils/get-uniswap-v2-tokens';
+import uniswapV2LiquidityProviderFee from './constants/uniswap-v2-liquidity-provider-fee';
 import getExpectedDestinationTokenQuantity from '../utils/get-expected-destination-token-quantity';
-import {
-	Route,
-	Token,
-	Trade,
-	ChainId,
-	Fetcher,
-	TradeType,
-	TokenAmount,
-} from '@uniswap/sdk';
 
 dotenv.config();
-
-const { WETH, ETH } = tokens;
 
 const getUniswapV2TradeData = async ({
 	sourceToken,
@@ -25,91 +15,40 @@ const getUniswapV2TradeData = async ({
 	sourceTokenQuantity = '1',
 }: GetTradeDataArgs) => {
 	try {
-		const uniLiquidityProviderFee = 0.003;
-		const setSourceToken =
-			sourceToken.symbol === ETH.symbol ? WETH : sourceToken;
-		const setDestinationToken =
-			destinationToken.symbol === ETH.symbol ? WETH : destinationToken;
-
-		// getUniswapTokens
-		// -------------------
-		const srcToken = new Token(
-			ChainId.MAINNET,
-			setSourceToken.address,
-			setSourceToken.decimals,
-			setSourceToken.symbol,
-			setSourceToken.name
-		);
-
-		const destToken = new Token(
-			ChainId.MAINNET,
-			setDestinationToken.address,
-			setDestinationToken.decimals,
-			setDestinationToken.symbol,
-			setDestinationToken.name
-		);
-
-		// getUniswapTrade
-		// ----------------
-		const tokenPair = await Fetcher.fetchPairData(
-			destToken,
-			srcToken,
-			infura
-		);
-
-		const route = new Route([tokenPair], srcToken);
 		const amountIn = web3.utils.toWei(sourceTokenQuantity);
 
-		const trade = new Trade(
-			route,
-			new TokenAmount(srcToken, amountIn),
-			TradeType.EXACT_INPUT
-		);
+		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
+			sourceToken,
+			destinationToken,
+		});
 
-		// getFormattedOutput
-		// --------------------
-		const readableExecutionPrice = parseFloat(
-			trade.executionPrice.toSignificant(6)
-		);
-		const readableNextMidPrice = parseFloat(
-			trade.nextMidPrice.toSignificant(6)
-		);
+		const uniTrade = await getUniswapV2Trade({
+			amountIn,
+			uniSourceToken,
+			uniDestinationToken,
+		});
 
-		const liquidityProviderFee = (
-			Number(sourceTokenQuantity) * uniLiquidityProviderFee
-		).toString();
-		const formattedExpectedRate = formatPrice(readableExecutionPrice);
-		const formattedNextMidPrice = formatPrice(readableNextMidPrice);
+		const expectedRates = buildExpectedRates({ uniTrade });
+
 		const expectedDestinationTokenQuantity = getExpectedDestinationTokenQuantity(
 			{
 				sourceTokenQuantity,
-				expectedRate: readableExecutionPrice.toString(),
+				expectedRate: expectedRates.string.expectedRate,
 			}
 		);
 
-		// https://uniswap.org/docs/v2/smart-contracts/router02/#swapexacttokensfortokens
+		const liquidityProviderFee = (
+			Number(sourceTokenQuantity) * uniswapV2LiquidityProviderFee
+		).toString();
 
 		return {
 			exchange: 'Uniswap v2',
 			platformFees: liquidityProviderFee,
 			sourceTokenQuantity,
-			sourceToken: setSourceToken,
-			destinationToken: setDestinationToken,
+			sourceToken: sourceToken,
+			destinationToken: destinationToken,
 			expectedDestinationTokenQuantity,
-			expectedRates: {
-				raw: {
-					expectedRate: readableExecutionPrice,
-					nextMidPrice: readableNextMidPrice,
-				},
-				rawString: {
-					expectedRate: readableExecutionPrice.toString(),
-					nextMidPrice: readableNextMidPrice.toString(),
-				},
-				formatted: {
-					expectedRate: formattedExpectedRate,
-					nextMidPrice: formattedNextMidPrice,
-				},
-			},
+			expectedRates,
 		};
 	} catch (error) {
 		throw new Error(error);

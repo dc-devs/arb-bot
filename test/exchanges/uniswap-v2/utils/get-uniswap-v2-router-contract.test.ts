@@ -10,7 +10,7 @@ before(() => {
 });
 
 describe('getUniswapV2RouterContract', () => {
-	it.only('should return Uniswap V2 Router Contract', () => {
+	it('should return Uniswap V2 Router Contract', () => {
 		const uniswapV2RouterContract = getUniswapV2RouterContract();
 		const { address, swapExactTokensForTokens } = uniswapV2RouterContract;
 

@@ -14,7 +14,7 @@ before(() => {
 });
 
 describe('getErc20TokenContract', async () => {
-	xit('should return ethers account for given private key', async () => {
+	it('should return ethers account for given private key', async () => {
 		const chainId = chainIds.MAINNET;
 		const privateKey = process.env.METAMASK_PRIVATE_KEY as string;
 		const account = getAccount(chainId, privateKey);

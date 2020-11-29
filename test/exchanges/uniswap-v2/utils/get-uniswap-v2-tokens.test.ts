@@ -11,7 +11,7 @@ before(() => {
 });
 
 describe('getUniswapV2Tokens', () => {
-	it.only('should return UniswapV2 tokens', () => {
+	it('should return UniswapV2 tokens', () => {
 		const sourceToken = WETH;
 		const destinationToken = RSR;
 

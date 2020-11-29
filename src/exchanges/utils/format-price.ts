@@ -4,7 +4,7 @@ const formatPrice = (price: number | string) => {
 	let priceInt = price;
 
 	if (typeof price === 'string') {
-		priceInt = parseFloat(price);
+		priceInt = Number(price);
 	}
 
 	return numeral(priceInt).format('0,0.000000000000000000');
