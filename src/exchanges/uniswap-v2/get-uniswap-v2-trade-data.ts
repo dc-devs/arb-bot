@@ -38,14 +38,7 @@ const getUniswapV2TradeData = async ({
 			inputTokenQuantity,
 			expectedRate: expectedRates.string.expectedRate,
 		});
-		// 1. Rename liquidity file
-		//
-		// 2. add tests for buildExpectedRates
-		// change name of file
-		//
-		// 3. Calc actual arb apportunity with this new data
-		//
-		// Should all areas possible return BN's instead of strings?
+
 		const liquidityProviderFee = getLiquidityProviderFee({
 			inputTokenQuantity,
 			uniswapV2LiquidityProviderFee,

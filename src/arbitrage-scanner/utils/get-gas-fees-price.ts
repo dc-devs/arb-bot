@@ -5,7 +5,7 @@ const getGasFeesPrice = async () => {
 	const gasFees = await getGasFees();
 	const priceEther = await getChainlinkTokenPrice();
 
-	const gasFeesPrice = Number(gasFees.fastestEth) * priceEther;
+	const gasFeesPrice = Number(gasFees.fastestGasPrice) * priceEther;
 
 	return gasFeesPrice.toString();
 };

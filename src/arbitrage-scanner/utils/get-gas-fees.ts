@@ -1,6 +1,5 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { web3 } from '../../providers/web3';
 
 dotenv.config();
 
@@ -9,22 +8,25 @@ interface GasFees {
 	fastestWait: number;
 }
 
-const getGasFees = async () => {
+interface GetFunction {
+	(url?: string): { data: GasFees };
+}
+
+interface MockAxios {
+	get: GetFunction;
+}
+
+const getGasFees = async (mockAxios?: MockAxios) => {
 	try {
+		const dividendForGwei = 10;
 		const apiKey = process.env.DEFI_PULSE_API_KEY;
 		const url = `https://data-api.defipulse.com/api/v1/egs/api/ethgasAPI.json?api-key=${apiKey}`;
-
-		const { data } = await axios.get(url);
+		const { data } = await (mockAxios || axios).get(url);
 		const { fastest, fastestWait } = data as GasFees;
-
-		const fastestGwei = (fastest / 10).toString();
-		const fastestWei = web3.utils.toWei(fastestGwei, 'gwei');
-		const fastestEth = web3.utils.fromWei(fastestWei, 'ether');
+		const fastestGasPrice = (fastest / dividendForGwei).toString();
 
 		const gasFees = {
-			fastestWei,
-			fastestEth,
-			fastestGwei,
+			fastestGasPrice,
 			fastestWait,
 		};
 
