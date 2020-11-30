@@ -1,6 +1,6 @@
 import chai from 'chai';
 import dotenv from 'dotenv';
-import getGasFees from '../../../src/apis/defi-pulse/get-gas-fees';
+import getGasPriceData from '../../../src/apis/defi-pulse/get-gas-price-data';
 
 const { expect } = chai;
 
@@ -10,7 +10,7 @@ before(() => {
 
 describe('apis', () => {
 	describe('defi-pulse', () => {
-		describe('getGasFees', async () => {
+		describe('getGasPriceData', async () => {
 			it('should return the gas fees', async () => {
 				const mockAxios = {
 					get: () => {
@@ -23,12 +23,10 @@ describe('apis', () => {
 					},
 				};
 
-				const { fastestGasPrice, fastestWait } = await getGasFees(
-					mockAxios
-				);
+				const { prices, times } = await getGasPriceData(mockAxios);
 
-				expect(fastestWait).to.equal(0.6);
-				expect(fastestGasPrice).to.equal('50');
+				expect(prices.fastest).to.equal('50');
+				expect(times.fastest).to.equal(0.6);
 			});
 		});
 	});

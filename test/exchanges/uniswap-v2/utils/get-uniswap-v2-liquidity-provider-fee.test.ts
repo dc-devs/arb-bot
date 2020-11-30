@@ -13,7 +13,7 @@ describe('exchanges', () => {
 	describe('uniswap-v2', () => {
 		describe('utils', () => {
 			describe('getUniswapV2LiquidityProviderFee', () => {
-				describe('when the token amount is high enough to calculate a provider fee', () => {
+				describe('when the token amount is 1', () => {
 					it('should return the execpected provider fee', () => {
 						const inputTokenQuantity = '1';
 
@@ -24,17 +24,25 @@ describe('exchanges', () => {
 							}
 						);
 
-						expect(liquidityProviderFee.wei).to.equal(
-							'3000000000000000'
-						);
 						expect(liquidityProviderFee.eth).to.equal('0.003');
-						expect(liquidityProviderFee.BN.toString()).to.equal(
-							'3000000000000000'
-						);
 					});
 				});
-				describe('when the token amount is not high enough to calculate a provider fee', () => {
-					it('should return the execpected provider fee, and a 0 wei', () => {
+				describe('when the token amount is 1000', () => {
+					it('should return the execpected provider fee', () => {
+						const inputTokenQuantity = '1000';
+
+						const liquidityProviderFee = getUniswapV2LiquidityProviderFee(
+							{
+								inputTokenQuantity,
+								uniswapV2LiquidityProviderFee,
+							}
+						);
+
+						expect(liquidityProviderFee.eth).to.equal('3');
+					});
+				});
+				describe('when the token amount is a decimanl', () => {
+					it('should return the execpected provider fee', () => {
 						const inputTokenQuantity = '0.0336645';
 
 						const liquidityProviderFee = getUniswapV2LiquidityProviderFee(
@@ -44,12 +52,8 @@ describe('exchanges', () => {
 							}
 						);
 
-						expect(liquidityProviderFee.wei).to.equal('0');
 						expect(liquidityProviderFee.eth).to.equal(
 							'0.00010099350000000001'
-						);
-						expect(liquidityProviderFee.BN.toString()).to.equal(
-							'0'
 						);
 					});
 				});

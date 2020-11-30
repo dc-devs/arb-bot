@@ -16,7 +16,7 @@ interface MockAxios {
 	get: GetFunction;
 }
 
-const getGasFees = async (mockAxios?: MockAxios) => {
+const getGasPriceData = async (mockAxios?: MockAxios) => {
 	try {
 		const dividendForGwei = 10;
 		const apiKey = process.env.DEFI_PULSE_API_KEY;
@@ -26,14 +26,18 @@ const getGasFees = async (mockAxios?: MockAxios) => {
 		const fastestGasPrice = (fastest / dividendForGwei).toString();
 
 		const gasFees = {
-			fastestGasPrice,
-			fastestWait,
+			prices: {
+				fastest: fastestGasPrice,
+			},
+			times: {
+				fastest: fastestWait,
+			},
 		};
 
 		return gasFees;
 	} catch (error) {
-		throw new Error(`Method::getGasFees: ${error}`);
+		throw new Error(`Method::getGasPriceData: ${error}`);
 	}
 };
 
-export default getGasFees;
+export default getGasPriceData;

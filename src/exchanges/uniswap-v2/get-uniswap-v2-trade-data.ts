@@ -55,15 +55,18 @@ const getUniswapV2TradeData = async ({
 			exchange: 'Uniswap v2',
 			gasEstimate,
 			platformFees: {
-				wei: liquidityProviderFee.wei,
 				eth: liquidityProviderFee.eth,
-				BN: liquidityProviderFee.BN,
 			},
 			inputTokenQuantity,
 			inputToken: inputToken,
 			outputToken: outputToken,
 			outputTokenQuantity,
 			expectedRates,
+			gasPrice: '',
+			gasFees: {
+				usd: '',
+				eth: '',
+			},
 		};
 	} catch (error) {
 		throw new Error(`Method::getUniswapV2TradeData: ${error}`);
