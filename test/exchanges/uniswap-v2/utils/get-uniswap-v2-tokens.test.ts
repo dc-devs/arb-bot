@@ -10,17 +10,28 @@ before(() => {
 	dotenv.config();
 });
 
-describe('getUniswapV2Tokens', () => {
-	it('should return UniswapV2 tokens', () => {
-		const inputToken = WETH;
-		const outputToken = RSR;
+describe('exchanges', () => {
+	describe('uniswap-v2', () => {
+		describe('utils', () => {
+			describe('getUniswapV2Tokens', () => {
+				it('should return UniswapV2 tokens', () => {
+					const inputToken = WETH;
+					const outputToken = RSR;
 
-		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			inputToken,
-			outputToken,
+					const {
+						uniSourceToken,
+						uniDestinationToken,
+					} = getUniswapV2Tokens({
+						inputToken,
+						outputToken,
+					});
+
+					expect(uniSourceToken.address).to.equal(inputToken.address);
+					expect(uniDestinationToken.address).to.equal(
+						outputToken.address
+					);
+				});
+			});
 		});
-
-		expect(uniSourceToken.address).to.equal(inputToken.address);
-		expect(uniDestinationToken.address).to.equal(outputToken.address);
 	});
 });

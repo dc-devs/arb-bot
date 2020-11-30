@@ -9,35 +9,44 @@ before(() => {
 	dotenv.config();
 });
 
-describe('buildUniswapV2ExpectedRates', () => {
-	it('should return the execpected rates object', async () => {
-		const mockUniTrade = ({
-			executionPrice: {
-				toSignificant: () => {
-					return '0.000033668';
-				},
-			},
-			nextMidPrice: {
-				toSignificant: () => {
-					return '0.0000337542';
-				},
-			},
-		} as unknown) as Trade;
+describe('exchanges', () => {
+	describe('uniswap-v2', () => {
+		describe('utils', () => {
+			describe('buildUniswapV2ExpectedRates', () => {
+				it('should return the execpected rates object', () => {
+					const mockUniTrade = ({
+						executionPrice: {
+							toSignificant: () => {
+								return '0.000033668';
+							},
+						},
+						nextMidPrice: {
+							toSignificant: () => {
+								return '0.0000337542';
+							},
+						},
+					} as unknown) as Trade;
 
-		const expectedRates = buildUniswapV2ExpectedRates({
-			uniTrade: mockUniTrade,
-		});
+					const expectedRates = buildUniswapV2ExpectedRates({
+						uniTrade: mockUniTrade,
+					});
 
-		expect(expectedRates).to.deep.equal({
-			number: { expectedRate: 0.000033668, nextMidPrice: 0.0000337542 },
-			string: {
-				expectedRate: '0.000033668',
-				nextMidPrice: '0.0000337542',
-			},
-			formatted: {
-				expectedRate: '0.000033668000000000',
-				nextMidPrice: '0.000033754200000000',
-			},
+					expect(expectedRates).to.deep.equal({
+						number: {
+							expectedRate: 0.000033668,
+							nextMidPrice: 0.0000337542,
+						},
+						string: {
+							expectedRate: '0.000033668',
+							nextMidPrice: '0.0000337542',
+						},
+						formatted: {
+							expectedRate: '0.000033668000000000',
+							nextMidPrice: '0.000033754200000000',
+						},
+					});
+				});
+			});
 		});
 	});
 });

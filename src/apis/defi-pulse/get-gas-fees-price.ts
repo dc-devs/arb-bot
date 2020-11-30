@@ -1,9 +1,11 @@
 import getGasFees from './get-gas-fees';
-import getChainlinkTokenPrice from '../../oracles/chainlink/get-chainlink-token-price';
+import tokens from '../../constants/tokens';
+import getChainlinkTokenPrice from '../../oracles/chainlink/get-chainlink-price-for-token';
 
 const getGasFeesPrice = async () => {
+	const { ETH } = tokens;
 	const gasFees = await getGasFees();
-	const priceEther = await getChainlinkTokenPrice();
+	const priceEther = await getChainlinkTokenPrice(ETH.symbol);
 
 	const gasFeesPrice = Number(gasFees.fastestGasPrice) * priceEther;
 

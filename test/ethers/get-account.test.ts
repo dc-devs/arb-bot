@@ -9,13 +9,16 @@ before(() => {
 	dotenv.config();
 });
 
-describe('getAccount', async () => {
-	it('should return ethers account for given private key', async () => {
-		const chainId = chainIds.MAINNET;
-		const metaMaskAddress = process.env.METAMASK_ADDRESS as string;
-		const metaMaskPrivateKey = process.env.METAMASK_PRIVATE_KEY as string;
-		const account = getAccount(chainId, metaMaskPrivateKey);
+describe('ethers', () => {
+	describe('getAccount', () => {
+		it('should return ethers account for given private key', () => {
+			const chainId = chainIds.MAINNET;
+			const metaMaskAddress = process.env.METAMASK_ADDRESS as string;
+			const metaMaskPrivateKey = process.env
+				.METAMASK_PRIVATE_KEY as string;
+			const account = getAccount(chainId, metaMaskPrivateKey);
 
-		expect(account.address).to.equal(metaMaskAddress);
+			expect(account.address).to.equal(metaMaskAddress);
+		});
 	});
 });

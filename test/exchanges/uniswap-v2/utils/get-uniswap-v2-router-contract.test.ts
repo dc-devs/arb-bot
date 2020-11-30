@@ -9,12 +9,23 @@ before(() => {
 	dotenv.config();
 });
 
-describe('getUniswapV2RouterContract', () => {
-	it('should return Uniswap V2 Router Contract', () => {
-		const uniswapV2RouterContract = getUniswapV2RouterContract();
-		const { address, swapExactTokensForTokens } = uniswapV2RouterContract;
+describe('exchanges', () => {
+	describe('uniswap-v2', () => {
+		describe('utils', () => {
+			describe('getUniswapV2RouterContract', () => {
+				it('should return Uniswap V2 Router Contract', () => {
+					const uniswapV2RouterContract = getUniswapV2RouterContract();
+					const {
+						address,
+						swapExactTokensForTokens,
+					} = uniswapV2RouterContract;
 
-		expect(address).to.equal(uniswapV2RouterAddress);
-		expect(typeof swapExactTokensForTokens).to.equal('function');
+					expect(address).to.equal(uniswapV2RouterAddress);
+					expect(typeof swapExactTokensForTokens).to.equal(
+						'function'
+					);
+				});
+			});
+		});
 	});
 });

@@ -13,38 +13,52 @@ before(() => {
 	dotenv.config();
 });
 
-describe('getUniswapV2TradeArgs', () => {
-	it('should return a UniswapV2 trade args', async () => {
-		const inputToken = WETH;
-		const outputToken = RSR;
-		const inputTokenQuantity = '1';
-		const amountIn = web3.utils.toWei(inputTokenQuantity);
+describe('exchanges', () => {
+	describe('uniswap-v2', () => {
+		describe('utils', () => {
+			describe('getUniswapV2TradeArgs', () => {
+				it('should return a UniswapV2 trade args', async () => {
+					const inputToken = WETH;
+					const outputToken = RSR;
+					const inputTokenQuantity = '1';
+					const amountIn = web3.utils.toWei(inputTokenQuantity);
 
-		const { uniSourceToken, uniDestinationToken } = getUniswapV2Tokens({
-			inputToken,
-			outputToken,
+					const {
+						uniSourceToken,
+						uniDestinationToken,
+					} = getUniswapV2Tokens({
+						inputToken,
+						outputToken,
+					});
+
+					const uniTrade = await getUniswapV2Trade({
+						amountIn,
+						uniSourceToken,
+						uniDestinationToken,
+					});
+
+					const {
+						amountOutMin,
+						to,
+						path,
+						deadline,
+					} = getUniswapV2TradeArgs({
+						uniTrade,
+						uniSourceToken,
+						uniDestinationToken,
+					});
+
+					expect(typeof amountOutMin).to.equal('string');
+					expect(to).to.equal(process.env.METAMASK_ADDRESS);
+					expect(path).to.deep.equal([
+						uniSourceToken.address,
+						uniDestinationToken.address,
+					]);
+					expect(typeof deadline).to.equal('number');
+
+					expect(true).to.equal(true);
+				});
+			});
 		});
-
-		const uniTrade = await getUniswapV2Trade({
-			amountIn,
-			uniSourceToken,
-			uniDestinationToken,
-		});
-
-		const { amountOutMin, to, path, deadline } = getUniswapV2TradeArgs({
-			uniTrade,
-			uniSourceToken,
-			uniDestinationToken,
-		});
-
-		expect(typeof amountOutMin).to.equal('string');
-		expect(to).to.equal(process.env.METAMASK_ADDRESS);
-		expect(path).to.deep.equal([
-			uniSourceToken.address,
-			uniDestinationToken.address,
-		]);
-		expect(typeof deadline).to.equal('number');
-
-		expect(true).to.equal(true);
 	});
 });

@@ -2,7 +2,7 @@
 import tokens from '../constants/tokens';
 import getTradePairData from './utils/get-trade-pair-data';
 import getBestTradePair from './utils/get-best-trade-pair';
-import getGasFeesPrice from './utils/get-gas-fees-price';
+import getGasFeesPrice from '../apis/defi-pulse/get-gas-fees-price';
 
 const { RSR, WETH } = tokens;
 
