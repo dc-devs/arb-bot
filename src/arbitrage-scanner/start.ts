@@ -2,7 +2,14 @@ import tokens from '../constants/tokens';
 import getTradePairData from './utils/get-trade-pair-data';
 import getBestTradePair from './utils/get-best-trade-pair';
 
-const { RSR, WETH } = tokens;
+const { RSR, WETH, DAI } = tokens;
+
+// LEFT OFF
+// Your gas fees is always slightly lower that uniswaps, doublecheck price oracle and gas Estimate
+// Caclulate platformFess {wei and BN}
+// and gasFees {wei and BN} so you can calc final outputs
+// Expected Trade Gain = outputTokenQuantity.th - gasFees.eth - platformFees.eth
+// Add chainlink price oracle data to final output
 
 const start = async () => {
 	// setInterval(async () => {
@@ -10,13 +17,13 @@ const start = async () => {
 		getTradePairData({
 			inputToken: WETH,
 			outputToken: RSR,
-			inputTokenQuantity: '.5',
+			inputTokenQuantity: '1',
 			customGasPrice: '50',
 		}),
 		getTradePairData({
 			inputToken: RSR,
 			outputToken: WETH,
-			inputTokenQuantity: '10000',
+			inputTokenQuantity: '50000',
 			customGasPrice: '50',
 		}),
 	]);

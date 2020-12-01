@@ -17,7 +17,9 @@ const getUniswapV2TradeData = async ({
 	inputTokenQuantity,
 }: GetTradeDataArgs) => {
 	try {
-		const gasLimit = 1000000;
+		// Higher Gass Limit allows miners to take more for creating a block, hence why this number goes up on meta mask when updating
+		// Block Gas Limit => https://upvest.co/blog/transaction-fee-estimations-how-to-save-on-gas
+		const gasLimit = '10000000';
 		const gasPrice = web3.utils.toWei('30', 'gwei');
 		const amountIn = web3.utils.toWei(inputTokenQuantity);
 
@@ -54,6 +56,7 @@ const getUniswapV2TradeData = async ({
 		return {
 			exchange: 'Uniswap v2',
 			gasEstimate,
+			gasLimit,
 			platformFees: {
 				eth: liquidityProviderFee.eth,
 			},

@@ -10,7 +10,14 @@ const getGasFees = async (gasPriceGwei: string, estimatedGas: string) => {
 	const gasPriceEth = web3.utils.fromWei(gasPriceWei, 'ether');
 
 	const gasFeeEth = Number(gasPriceEth) * Number(estimatedGas);
-	const gasPriceUSD = gasFeeEth * priceEtherUSD;
+	const gasPriceUSD = Number(gasFeeEth) * Number(priceEtherUSD);
+
+	console.log('--- gasPriceGwei', gasPriceGwei);
+	console.log('--- gasPriceWei', gasPriceWei);
+	console.log('--- gasPriceEth', gasPriceEth);
+	console.log('--- estimatedGas', estimatedGas);
+	console.log('--- gasFeeEth', gasFeeEth);
+	console.log('--- gasPriceUSD', gasPriceUSD);
 
 	return {
 		eth: gasFeeEth.toString(),

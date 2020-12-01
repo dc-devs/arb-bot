@@ -19,7 +19,7 @@ describe('exchanges', () => {
 			describe('when account has the current token amount available', () => {
 				it('should return the gas estimate for trade transaction (WETH->RSR) on UniSwapV2', async () => {
 					const gasPrice = web3.utils.toWei('30', 'gwei');
-					const gasLimit = 1000000;
+					const gasLimit = '1000000';
 
 					const [error, gasEstimate] = await to(
 						getGasEstimateSwapExactTokensForTokens({
@@ -29,7 +29,7 @@ describe('exchanges', () => {
 							providerOptions: { gasPrice, gasLimit },
 						})
 					);
-
+					console.log(gasEstimate);
 					const gasEstimateFloor = 100000;
 					const gasEstimateNumber = Number(gasEstimate);
 
@@ -40,7 +40,7 @@ describe('exchanges', () => {
 
 				it('should return the gas estimate for trade transaction (RSR->WETH) on UniSwapV2', async () => {
 					const gasPrice = web3.utils.toWei('30', 'gwei');
-					const gasLimit = 1000000;
+					const gasLimit = '1000000';
 
 					const [error, gasEstimate] = await to(
 						getGasEstimateSwapExactTokensForTokens({
@@ -62,7 +62,7 @@ describe('exchanges', () => {
 			describe('when account does not have the current token amount available', () => {
 				it('should return the default gas estimate for trade transaction (UNI->WETH) on UniSwapV2', async () => {
 					const gasPrice = web3.utils.toWei('30', 'gwei');
-					const gasLimit = 1000000;
+					const gasLimit = '1000000';
 
 					const [error, gasEstimate] = await to(
 						getGasEstimateSwapExactTokensForTokens({

@@ -63,6 +63,7 @@ const getKyberNetworkTradeData = async ({
 				},
 			},
 			gasEstimate: '0',
+			gasLimit: '0',
 			gasPrice: '',
 			gasFees: {
 				usd: '',
