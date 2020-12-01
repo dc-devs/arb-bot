@@ -1,5 +1,6 @@
 import chai from 'chai';
 import dotenv from 'dotenv';
+import { web3 } from '../../../../src/providers/web3';
 import getUniswapV2LiquidityProviderFee from '../../../../src/exchanges/uniswap-v2/utils/get-uniswap-v2-liquidity-provider-fee';
 import uniswapV2LiquidityProviderFee from '../../../../src/exchanges/uniswap-v2/constants/uniswap-v2-liquidity-provider-fee';
 
@@ -24,7 +25,15 @@ describe('exchanges', () => {
 							}
 						);
 
-						expect(liquidityProviderFee.eth).to.equal('0.003');
+						expect(liquidityProviderFee.eth).to.equal(
+							'0.003000000000000000'
+						);
+						expect(liquidityProviderFee.wei).to.equal(
+							'3000000000000000'
+						);
+						expect(liquidityProviderFee.BN.toString()).to.equal(
+							web3.utils.toBN('3000000000000000').toString()
+						);
 					});
 				});
 				describe('when the token amount is 1000', () => {
@@ -38,7 +47,15 @@ describe('exchanges', () => {
 							}
 						);
 
-						expect(liquidityProviderFee.eth).to.equal('3');
+						expect(liquidityProviderFee.eth).to.equal(
+							'3.000000000000000000'
+						);
+						expect(liquidityProviderFee.wei).to.equal(
+							'3000000000000000000'
+						);
+						expect(liquidityProviderFee.BN.toString()).to.equal(
+							web3.utils.toBN('3000000000000000000').toString()
+						);
 					});
 				});
 				describe('when the token amount is a decimanl', () => {
@@ -53,7 +70,13 @@ describe('exchanges', () => {
 						);
 
 						expect(liquidityProviderFee.eth).to.equal(
-							'0.00010099350000000001'
+							'0.000100993500000000'
+						);
+						expect(liquidityProviderFee.wei).to.equal(
+							'100993500000000'
+						);
+						expect(liquidityProviderFee.BN.toString()).to.equal(
+							web3.utils.toBN('100993500000000').toString()
 						);
 					});
 				});

@@ -12,13 +12,6 @@ const getGasFees = async (gasPriceGwei: string, estimatedGas: string) => {
 	const gasFeeEth = Number(gasPriceEth) * Number(estimatedGas);
 	const gasPriceUSD = Number(gasFeeEth) * Number(priceEtherUSD);
 
-	console.log('--- gasPriceGwei', gasPriceGwei);
-	console.log('--- gasPriceWei', gasPriceWei);
-	console.log('--- gasPriceEth', gasPriceEth);
-	console.log('--- estimatedGas', estimatedGas);
-	console.log('--- gasFeeEth', gasFeeEth);
-	console.log('--- gasPriceUSD', gasPriceUSD);
-
 	return {
 		eth: gasFeeEth.toString(),
 		usd: gasPriceUSD.toFixed(2),

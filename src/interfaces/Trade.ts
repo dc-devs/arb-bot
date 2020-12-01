@@ -1,4 +1,5 @@
 import Token from './Token';
+import BN from 'bn.js';
 
 export interface Number {
 	[key: string]: number;
@@ -38,6 +39,8 @@ export interface ExpectedRates {
 
 export interface PlatformFees {
 	eth: string;
+	wei: string;
+	BN: BN;
 }
 
 export interface GasFees {

@@ -59,6 +59,8 @@ const getUniswapV2TradeData = async ({
 			gasLimit,
 			platformFees: {
 				eth: liquidityProviderFee.eth,
+				wei: liquidityProviderFee.wei,
+				BN: liquidityProviderFee.BN,
 			},
 			inputTokenQuantity,
 			inputToken: inputToken,
