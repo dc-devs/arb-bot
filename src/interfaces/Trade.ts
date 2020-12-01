@@ -57,7 +57,7 @@ export interface Trade {
 	platformFees: PlatformFees;
 	outputTokenQuantity: string;
 	expectedRates: ExpectedRates;
-	gasFees: GasFees;
+	transactionFees: GasFees;
 	gasLimit: string;
 	gasPrice: string;
 }

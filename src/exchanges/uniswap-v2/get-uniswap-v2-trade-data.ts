@@ -68,7 +68,7 @@ const getUniswapV2TradeData = async ({
 			outputTokenQuantity,
 			expectedRates,
 			gasPrice: '',
-			gasFees: {
+			transactionFees: {
 				usd: '',
 				eth: '',
 			},

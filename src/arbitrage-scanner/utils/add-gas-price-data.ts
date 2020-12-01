@@ -23,7 +23,7 @@ const addGasPriceData = async ({
 
 	const gasFees = await getGasFees(gasPriceGwei, tradeCopy.gasEstimate);
 
-	tradeCopy.gasFees = gasFees;
+	tradeCopy.transactionFees = gasFees;
 	tradeCopy.gasPrice = gasPriceGwei;
 
 	return tradeCopy;

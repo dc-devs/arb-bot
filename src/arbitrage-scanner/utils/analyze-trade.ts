@@ -8,12 +8,12 @@ interface AnalyzeTradeArgs {
 const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 	const outgoingTradeData = {
 		exchange: outgoingTrade.exchange,
-		platformFees: outgoingTrade.platformFees,
-		expectedRate: outgoingTrade.expectedRates.string,
-		gasEstimate: outgoingTrade.gasEstimate,
 		gasPrice: outgoingTrade.gasPrice,
 		gasLimit: outgoingTrade.gasLimit,
-		gasFees: outgoingTrade.gasFees,
+		gasEstimate: outgoingTrade.gasEstimate,
+		transactionFees: outgoingTrade.transactionFees,
+		platformFees: outgoingTrade.platformFees,
+		expectedRate: outgoingTrade.expectedRates.string,
 		inputToken: outgoingTrade.inputToken.symbol,
 		inputTokenQuantity: outgoingTrade.inputTokenQuantity,
 		outputToken: outgoingTrade.outputToken.symbol,
@@ -22,12 +22,12 @@ const analyzeTrade = ({ outgoingTrade, incomingTrade }: AnalyzeTradeArgs) => {
 
 	const incomingTradeData = {
 		exchange: incomingTrade.exchange,
-		platformFees: incomingTrade.platformFees,
-		expectedRate: incomingTrade.expectedRates.string,
-		gasEstimate: incomingTrade.gasEstimate,
 		gasPrice: incomingTrade.gasPrice,
 		gasLimit: incomingTrade.gasLimit,
-		gasFees: incomingTrade.gasFees,
+		gasEstimate: incomingTrade.gasEstimate,
+		transactionFees: incomingTrade.transactionFees,
+		platformFees: incomingTrade.platformFees,
+		expectedRate: incomingTrade.expectedRates.string,
 		inputToken: incomingTrade.inputToken.symbol,
 		inputTokenQuantity: incomingTrade.inputTokenQuantity,
 		outputToken: incomingTrade.outputToken.symbol,
