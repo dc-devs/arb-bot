@@ -18,6 +18,8 @@ describe('arbitrage-scanner', () => {
 
 				expect(typeof gasFees.eth).to.equal('string');
 				expect(typeof gasFees.usd).to.equal('string');
+				expect(typeof gasFees.wei).to.equal('string');
+				expect(typeof gasFees.BN.toString()).to.equal('string');
 			});
 		});
 	});

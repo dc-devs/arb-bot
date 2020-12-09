@@ -12,9 +12,16 @@ const getGasFees = async (gasPriceGwei: string, estimatedGas: string) => {
 	const gasFeeEth = Number(gasPriceEth) * Number(estimatedGas);
 	const gasPriceUSD = Number(gasFeeEth) * Number(priceEtherUSD);
 
+	const gasFeeEthString = gasFeeEth.toFixed(18);
+	const gasFeeUSDString = gasPriceUSD.toFixed(2);
+	const gasFeeWeiString = web3.utils.toWei(gasFeeEthString, 'ether');
+	const gasFeeBN = web3.utils.toBN(gasFeeWeiString);
+
 	return {
-		eth: gasFeeEth.toString(),
-		usd: gasPriceUSD.toFixed(2),
+		wei: gasFeeWeiString,
+		eth: gasFeeEthString,
+		BN: gasFeeBN,
+		usd: gasFeeUSDString,
 	};
 };
 

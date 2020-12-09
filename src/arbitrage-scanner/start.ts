@@ -5,9 +5,16 @@ import getBestTradePair from './utils/get-best-trade-pair';
 const { RSR, WETH } = tokens;
 
 // LEFT OFF
-// uid Possibly create a "safe number" util to use in, platoform liquid fees method, and test
-// Your gas fees is always slightly lower that uniswaps, doublecheck price oracle and gas Estimate
-// and gasFees {wei and BN} so you can calc final outputs
+// Possibly create a "safe number" util to use in, platoform liquid fees method, and test
+// will be something like Number(tokenQuantity).toFixed(18);
+//
+// Your gas fees is always slightly lower that uniswaps
+// (actually this is metamask's estimated gas price),
+// Doublecheck price oracle and gas Estimate
+// Also note here that gas limit affects overall estimate in meta mask,
+// as "I think" miners will use this extra gas, maybe we use gas limit as the
+// fee that needs to have a limit to ensure the trade is profitable..
+//
 // Expected Trade Gain = outputTokenQuantity.th - gasFees.eth - platformFees.eth
 // Add chainlink price oracle data to final output
 
