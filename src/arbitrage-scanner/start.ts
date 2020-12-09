@@ -15,7 +15,8 @@ const { RSR, WETH } = tokens;
 // as "I think" miners will use this extra gas, maybe we use gas limit as the
 // fee that needs to have a limit to ensure the trade is profitable..
 //
-// Expected Trade Gain = outputTokenQuantity.th - gasFees.eth - platformFees.eth
+// Expected Trade Gain = outputTokenQuantity.eth - gasFees.eth - platformFees.eth
+//
 // Add chainlink price oracle data to final output
 
 const start = async () => {

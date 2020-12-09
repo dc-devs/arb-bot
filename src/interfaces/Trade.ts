@@ -44,8 +44,10 @@ export interface PlatformFees {
 }
 
 export interface GasFees {
+	wei: string;
 	eth: string;
 	usd: string;
+	BN: BN;
 }
 
 export interface Trade {

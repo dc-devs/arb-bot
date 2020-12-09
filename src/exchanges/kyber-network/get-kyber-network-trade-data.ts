@@ -66,8 +66,10 @@ const getKyberNetworkTradeData = async ({
 			gasLimit: '0',
 			gasPrice: '',
 			transactionFees: {
+				wei: '',
 				usd: '',
 				eth: '',
+				BN: web3.utils.toBN('0'),
 			},
 		};
 	} catch (error) {

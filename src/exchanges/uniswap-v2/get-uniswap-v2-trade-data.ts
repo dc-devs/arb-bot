@@ -69,8 +69,10 @@ const getUniswapV2TradeData = async ({
 			expectedRates,
 			gasPrice: '',
 			transactionFees: {
+				wei: '',
 				usd: '',
 				eth: '',
+				BN: web3.utils.toBN('0'),
 			},
 		};
 	} catch (error) {
